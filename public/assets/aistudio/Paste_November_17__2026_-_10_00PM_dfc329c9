@@ -1,0 +1,862 @@
+# NOVARA — FINAL PRODUCTION AUDIT & IMPLEMENTATION
+## Google/Facebook/Email Authentication Verification + NPM-Based Bangladesh Dynamic Address System
+
+### ROLE
+
+Act as a Principal Full-Stack Software Architect, Senior Backend Engineer, OAuth Security Specialist, Database Architect, Bangladesh Geographic Data Integration Specialist, QA Automation Engineer, and Production Readiness Auditor.
+
+Your responsibility is to complete TWO clearly defined tasks in the existing NOVARA e-commerce application.
+
+**TASK 1:** Perform a complete final production verification of Google, Facebook, and Email/Password authentication. Fix only confirmed problems.
+
+**TASK 2:** Replace the existing manually maintained or hardcoded Bangladesh address dataset with a properly evaluated and integrated NPM package, implementing a complete cascading address selection system across frontend, backend, database, checkout, orders, and Admin Panel.
+
+This is a real production implementation, not a frontend demonstration.
+
+---
+
+# GLOBAL RULES — MUST FOLLOW
+
+Before making any changes:
+
+1. Inspect the complete existing NOVARA project.
+2. Understand its frontend and backend architecture.
+3. Inspect the existing database structure and relationships.
+4. Read the existing authentication implementation.
+5. Read the current address implementation, including `/src/lib/bdLocations.ts` if it exists.
+6. Inspect every component and API that uses the address data.
+7. Inspect checkout, order creation, order details, customer profile, and Admin Panel address management.
+8. Identify existing working functionality and preserve it.
+
+### STRICT PRESERVATION POLICY
+
+Do not unnecessarily modify:
+
+- Existing business logic.
+- Existing components.
+- Existing page layouts.
+- Existing visual design.
+- Existing URLs.
+- Existing API routes.
+- Existing database relationships.
+- Existing checkout behavior.
+- Existing order processing.
+- Existing payment functionality.
+- Existing authentication behavior.
+- Existing Admin Panel navigation.
+- Existing unrelated modules.
+
+Do not rewrite the application or introduce duplicate systems.
+
+Extend the existing implementation with minimal, targeted, backward-compatible changes.
+
+**Do not start coding before understanding the complete impact of both tasks.**
+
+---
+
+# TASK 1 — FINAL PRODUCTION VERIFICATION OF AUTHENTICATION
+
+## 1.1 Inspect the existing authentication system
+
+Perform a complete audit of:
+
+- Google OAuth.
+- Facebook OAuth.
+- Email/Password registration.
+- Email/Password login.
+- Email-first authentication flow.
+- OAuth callback routes.
+- Authentication API routes.
+- Controllers.
+- Services.
+- Middleware.
+- Database user models.
+- Provider identity relationships.
+- Session/token management.
+- Protected routes.
+- Logout.
+- User profile retrieval.
+- Navigation bar authentication state.
+- User avatar and initials.
+- Admin user registration analytics.
+
+Do not assume that a feature works because its button or interface exists.
+
+Trace the real authentication lifecycle from frontend to backend, provider verification, database persistence, and authenticated session.
+
+## 1.2 Google authentication verification
+
+Verify the actual Google OAuth 2.0 / OpenID Connect implementation.
+
+Test:
+
+- OAuth authorization initiation.
+- Correct client configuration.
+- Registered callback URL.
+- State validation.
+- PKCE where applicable.
+- Nonce validation where applicable.
+- Authorization code exchange.
+- ID token signature verification.
+- Issuer validation.
+- Audience validation.
+- Expiration validation.
+- Verified email handling.
+- Google provider identity persistence.
+- Existing account detection.
+- New account creation.
+- Secure session establishment.
+- Logout and subsequent login.
+
+Confirm that Google authentication is genuinely verified by the backend.
+
+Never trust frontend-submitted identity information.
+
+Never simulate successful authentication.
+
+## 1.3 Facebook authentication verification
+
+Verify the real Meta OAuth implementation.
+
+Test:
+
+- Authorization initiation.
+- App ID and server-side App Secret configuration.
+- Callback URL.
+- State validation.
+- Authorization code exchange.
+- Token handling.
+- Provider identity verification.
+- Graph API profile retrieval.
+- Permission handling.
+- Missing email handling.
+- Profile photo handling.
+- Database persistence.
+- Existing account detection.
+- Session establishment.
+- Logout and subsequent login.
+
+Do not assume Facebook always provides an email address.
+
+Handle denied permissions, expired tokens, revoked access, and user cancellation safely.
+
+## 1.4 Email/Password authentication verification
+
+Verify:
+
+- Email input.
+- Email validation.
+- Password input.
+- Password validation.
+- Registration.
+- Login.
+- Password hashing.
+- Backend authentication.
+- Database persistence.
+- Session creation.
+- Session restoration.
+- Logout.
+- Error handling.
+- Duplicate registration prevention.
+
+### Mobile email-first bug investigation
+
+Check whether the current email-first login flow behaves correctly on mobile.
+
+Investigate:
+
+- Input state.
+- Form submission.
+- Button handlers.
+- Conditional rendering.
+- Mobile responsive CSS.
+- API response handling.
+- Email value persistence between steps.
+- Password step transition.
+- Mobile keyboard interactions.
+- Focus behavior.
+- Browser autofill.
+- React state synchronization.
+
+If desktop works but mobile fails, identify and fix the actual root cause.
+
+Do not change the existing authentication design unnecessarily.
+
+## 1.5 Unified account identity verification
+
+Confirm that Google, Facebook, and Email/Password authentication use the existing unified NOVARA user identity system.
+
+Verify:
+
+- No duplicate user creation.
+- No duplicate provider identity.
+- Correct provider-to-user relationships.
+- Safe account linking.
+- Verified email handling.
+- Existing user login.
+- Missing profile information.
+- Disabled user accounts.
+- Session expiration.
+- Session revocation.
+
+Never automatically link accounts solely because two providers return the same email address without an appropriate trusted verification process.
+
+## 1.6 Navigation bar identity verification
+
+After successful login, verify that:
+
+- The guest account icon is replaced with the user's actual profile photo or initials.
+- Google profile photos work when available.
+- Facebook profile photos work when available.
+- Missing or broken photos fall back to initials.
+- Email/password users also receive initials.
+- Initials are generated from the actual name.
+- Avatar remains circular and visually consistent.
+- Identity survives page reloads.
+- Identity updates correctly after logout.
+
+Do not change the existing navigation design unnecessarily.
+
+## 1.7 Authentication Admin Panel verification
+
+Verify that provider-wise registration statistics are calculated using real database records.
+
+Check:
+
+- Total users.
+- Google registrations.
+- Facebook registrations.
+- Email/Password registrations.
+- New users today.
+- New users this week.
+- New users this month.
+
+A user must not be counted multiple times merely because they log in multiple times or link multiple providers.
+
+Preserve the original registration attribution.
+
+Verify admin authorization at the backend.
+
+### TASK 1 ACCEPTANCE CRITERIA
+
+If Google, Facebook, and Email/Password authentication are already working correctly, do not unnecessarily rebuild them.
+
+Only fix actual defects.
+
+If a real provider test is blocked by missing credentials or provider configuration, clearly report it as BLOCKED.
+
+Do not claim successful real-world OAuth testing without completing the actual provider flow.
+
+---
+
+# TASK 2 — NPM-BASED BANGLADESH DYNAMIC ADDRESS SYSTEM
+
+## 2.1 Understand the existing address architecture
+
+First, inspect the current address implementation.
+
+Pay special attention to:
+
+- Existing Bangladesh division dataset.
+- District dataset.
+- Upazila/thana dataset.
+- Union dataset.
+- Urban area or city corporation options.
+- Existing address components.
+- Existing dropdown behavior.
+- Existing address validation.
+- Existing address API.
+- Existing checkout form.
+- Existing order address model.
+- Existing customer profile address.
+- Existing Admin Panel order address display.
+- Existing delivery/shipping calculations.
+- Existing database columns and relationships.
+
+Inspect all references to the existing address utility and its data.
+
+Identify exactly where the current manually maintained, static, or hardcoded dataset is being used.
+
+Do not remove existing behavior before confirming all dependencies.
+
+## 2.2 NPM package discovery and evaluation — mandatory
+
+The requirement is to use a genuine NPM package for Bangladesh administrative geographic data.
+
+Do not invent a package name.
+
+Investigate suitable candidates, including:
+
+- `bd-divisions-to-unions`
+- `@olism/bd-geo`
+- `bd-geo-info`
+
+These are candidates to evaluate, not automatic installation instructions.
+
+For each candidate, verify:
+
+1. Does the package actually exist on the official NPM registry?
+2. Is it currently installable?
+3. What is its latest stable version?
+4. Is the package maintained?
+5. What is its license?
+6. Does it support the existing project's Node.js version?
+7. Does it support the project's module system?
+8. Does it work with the current frontend framework and backend?
+9. Does it provide TypeScript definitions if required?
+10. Does it provide all 8 Bangladesh divisions?
+11. Does it provide all 64 districts?
+12. Does it provide upazilas/thanas?
+13. Does it provide unions?
+14. Does it support urban areas, Pourashava, or City Corporation where required?
+15. Does it provide Bangla and English names?
+16. Does it provide stable IDs or codes?
+17. Can parent-child relationships be reliably resolved?
+18. Are there duplicate or missing records?
+19. Can the package be safely used in the backend?
+20. Does it introduce unnecessary dependencies or security risks?
+
+Read the official package documentation and inspect the actual package API before implementation.
+
+### Package selection rule
+
+Select the package that best satisfies the existing NOVARA address requirements.
+
+If the existing project requires Union, Pourashava, City Corporation, or other urban delivery areas, do not select a package that lacks those records without a verified compatibility solution.
+
+If no single package provides complete coverage:
+
+- Identify the missing geographic levels.
+- Evaluate compatible packages or official authoritative datasets.
+- Avoid mixing inconsistent IDs or unrelated geographic records.
+- Do not silently omit locations.
+- Document the final data source and any limitations.
+
+**Do not install multiple packages unnecessarily. Prefer one reliable package that covers the complete required hierarchy.**
+
+## 2.3 Required geographic hierarchy
+
+The address selector must support the following cascading hierarchy:
+
+<pre>
+Bangladesh
+  └── Division
+        └── District
+              └── Upazila / Thana
+                    └── Union / Appropriate Urban Area
+</pre>
+
+Required levels:
+
+1. Division.
+2. District.
+3. Upazila / Thana.
+4. Union / Appropriate Area.
+
+The actual hierarchy and supported area types must follow the selected package's data model.
+
+Do not treat a City Corporation or Pourashava as a Union if the package models them as different area types.
+
+## 2.4 Required cascading dropdown behavior
+
+### Initial state
+
+When the user first opens the address form:
+
+- Show the Division dropdown.
+- Do not automatically select a random division.
+- Do not display all districts, upazilas, and unions as preselected initial values.
+- Lower-level dropdowns must remain disabled until their parent level is selected.
+- Show clear placeholders.
+
+Example:
+
+Division: Select Division
+
+District: Select District
+
+Upazila/Thana: Select Upazila/Thana
+
+Union/Area: Select Union/Area
+
+### Step 1 — Division selection
+
+When a user opens the Division dropdown:
+
+- Display all available Bangladesh divisions.
+- Allow the user to select one division.
+- Retrieve only the districts belonging to that selected division.
+- Reset any previously selected lower-level address values.
+
+### Step 2 — District selection
+
+When a user selects a district:
+
+- Display only districts belonging to the selected division.
+- Retrieve the relevant upazilas/thanas of that district.
+- Reset previously selected upazila and union values.
+
+### Step 3 — Upazila/Thana selection
+
+When a user selects an upazila/thana:
+
+- Display only upazilas/thanas belonging to the selected district.
+- Retrieve only the unions or appropriate areas belonging to that selected upazila/thana.
+- Reset any previously selected union/area value.
+
+### Step 4 — Union/Area selection
+
+When a user selects the final location:
+
+- Save the correct geographic identifier.
+- Save the correct parent relationships.
+- Preserve the correct Bangla and English names when available.
+- Make the selection available to checkout and order submission.
+
+### Critical cascading rules
+
+If the user changes Division:
+
+- Clear District.
+- Clear Upazila/Thana.
+- Clear Union/Area.
+
+If the user changes District:
+
+- Clear Upazila/Thana.
+- Clear Union/Area.
+
+If the user changes Upazila/Thana:
+
+- Clear Union/Area.
+
+Never allow an invalid combination of unrelated geographic locations.
+
+## 2.5 Searchable and user-friendly dropdowns
+
+Use the existing design system and existing components wherever possible.
+
+Provide:
+
+- Searchable dropdowns where compatible.
+- Clear selected values.
+- Keyboard accessibility.
+- Loading states.
+- Empty states.
+- Disabled states.
+- Error handling.
+- Bangla/English display according to existing application conventions.
+- Proper mobile responsiveness.
+
+Do not redesign the entire address form.
+
+Preserve its existing visual appearance, spacing, colors, labels, and layout unless a small targeted change is necessary.
+
+## 2.6 Remove dependency on the old manually maintained dataset
+
+The selected NPM package must become the authoritative source for the supported Bangladesh geographic hierarchy.
+
+Do not continue using the old hardcoded arrays as an independent competing source of truth.
+
+Inspect existing modules such as:
+
+`/src/lib/bdLocations.ts`
+
+If this module is referenced throughout the project:
+
+- Preserve its public interface where practical.
+- Refactor its implementation to use the selected NPM package.
+- Keep existing consumers working.
+- Maintain backward compatibility.
+- Update callers only where necessary.
+- Avoid duplicated location datasets.
+
+Do not delete the old module blindly.
+
+The final implementation must have one clearly defined geographic data source.
+
+## 2.7 Backend integration
+
+This is a full-stack requirement.
+
+Do not implement the package only in a React component.
+
+The backend must correctly integrate with the selected package and the existing NOVARA architecture.
+
+Inspect and implement the necessary:
+
+- Geographic location service.
+- Address controllers.
+- Address API routes.
+- Request validation.
+- Geographic hierarchy validation.
+- Address persistence logic.
+- Order address handling.
+- Admin address retrieval.
+
+Possible logical APIs:
+
+- GET /api/locations/divisions
+- GET /api/locations/divisions/:divisionId/districts
+- GET /api/locations/districts/:districtId/upazilas
+- GET /api/locations/upazilas/:upazilaId/areas
+
+These are examples only.
+
+Reuse existing endpoint conventions and existing APIs where appropriate.
+
+### Backend validation
+
+When a checkout or profile address is submitted:
+
+1. Validate the division identifier.
+2. Verify the district belongs to that division.
+3. Verify the upazila/thana belongs to that district.
+4. Verify the union/area belongs to that upazila/thana.
+5. Reject invalid geographic combinations.
+6. Validate required delivery address details.
+7. Persist the address only after successful validation.
+
+Never trust the geographic hierarchy submitted by the frontend.
+
+## 2.8 Database integration and backward compatibility
+
+Inspect the existing database schema before making changes.
+
+Preserve existing order and customer address relationships.
+
+Where appropriate, persist:
+
+- Division ID.
+- Division name.
+- District ID.
+- District name.
+- Upazila/Thana ID.
+- Upazila/Thana name.
+- Union/Area ID.
+- Union/Area name.
+- Street, house, road, or additional address details.
+- Postal code if supported.
+- Recipient name.
+- Recipient phone number.
+
+Use the selected package's stable IDs or codes where available.
+
+Do not use array indexes as permanent geographic identifiers.
+
+### Database rules
+
+- Use appropriate database types.
+- Maintain valid relationships.
+- Add indexes where useful.
+- Add constraints where appropriate.
+- Keep existing order history intact.
+- Preserve old address records.
+- Make migrations backward-compatible.
+- Do not reset production databases.
+- Do not delete historical order addresses.
+- Do not change unrelated database columns.
+
+### Important historical address rule
+
+Existing orders must continue displaying their original saved delivery addresses even after the location package or dataset is updated.
+
+Do not regenerate historical order addresses from current geographic lookup data.
+
+Use saved address snapshots where appropriate.
+
+## 2.9 Checkout integration
+
+Integrate the new location system into the existing checkout form.
+
+Verify that:
+
+- Division selection works.
+- District selection works.
+- Upazila/Thana selection works.
+- Union/Area selection works.
+- Parent-child filtering works.
+- Previously selected values reset correctly.
+- Validation works.
+- Required address fields remain required.
+- Delivery details are submitted correctly.
+- Order creation receives the correct address.
+- Payment flow remains unaffected.
+- Order confirmation displays the correct address.
+
+Do not break the existing checkout design or checkout workflow.
+
+## 2.10 Customer profile and saved addresses
+
+If NOVARA currently supports customer profile addresses or saved addresses, integrate the new geographic identifiers without breaking existing functionality.
+
+Verify:
+
+- New address creation.
+- Address editing.
+- Address selection.
+- Saved address retrieval.
+- Correct cascading selection when editing an existing address.
+- Existing saved addresses remain accessible.
+
+When editing an existing address, prefill the correct hierarchy in parent-to-child order.
+
+Do not show an empty form if a valid saved address exists.
+
+## 2.11 Admin Panel integration
+
+Inspect how administrators currently view customer and order addresses.
+
+Ensure:
+
+- Existing orders display correct addresses.
+- Division names are correct.
+- District names are correct.
+- Upazila/Thana names are correct.
+- Union/Area names are correct.
+- Existing address search/filtering continues to work.
+- Address information remains available after database retrieval.
+- No hardcoded address labels are introduced.
+
+If the Admin Panel contains an address creation or editing form, integrate the same cascading location logic there where appropriate.
+
+Do not expose geographic management controls that the existing business logic does not require.
+
+---
+
+# PHASE 3 — PERFORMANCE, SECURITY & RELIABILITY
+
+For the location system:
+
+- Avoid loading the complete dataset repeatedly.
+- Reuse the selected package's supported lookup functions.
+- Cache immutable geographic lookup data where appropriate.
+- Avoid unnecessary API requests.
+- Prevent race conditions when users rapidly change selections.
+- Handle unavailable or invalid geographic records.
+- Validate all identifiers on the server.
+- Avoid trusting frontend-only validation.
+- Prevent stale child options from being displayed.
+- Keep the dropdown responsive on mobile.
+
+For authentication:
+
+- Preserve existing OAuth security.
+- Do not expose client secrets.
+- Maintain secure session handling.
+- Keep backend authorization active.
+- Do not introduce insecure account linking.
+
+For both tasks:
+
+- Use proper error handling.
+- Do not log secrets or sensitive authentication tokens.
+- Keep production configuration separate from development configuration.
+
+---
+
+# PHASE 4 — ROOT CAUSE ANALYSIS & IMPLEMENTATION
+
+For every problem discovered, follow this workflow:
+
+1. Reproduce the issue.
+2. Identify the affected module.
+3. Trace the complete frontend-to-backend flow.
+4. Inspect the API response.
+5. Inspect database behavior.
+6. Identify the actual root cause.
+7. Select the smallest safe fix.
+8. Implement the fix.
+9. Run targeted tests.
+10. Run regression tests.
+
+Do not make speculative changes.
+
+Do not replace a working authentication flow.
+
+Do not rewrite the checkout module.
+
+Do not introduce a second location system.
+
+Do not modify unrelated URLs, components, functions, or designs.
+
+---
+
+# PHASE 5 — COMPLETE FINAL VERIFICATION
+
+## Authentication test matrix
+
+Verify:
+
+| Test | Expected result |
+|---|---|
+| Google OAuth | Real backend-verified login |
+| Facebook OAuth | Real backend-verified login |
+| Email registration | Real database user creation |
+| Email login | Correct authenticated session |
+| Existing Google user | No duplicate account |
+| Existing Facebook user | No duplicate account |
+| Account linking | Secure verification |
+| Navigation avatar | Correct photo or initials |
+| Page reload | Session restored correctly |
+| Logout | Session invalidated |
+| Mobile email-first | Correct step transition |
+| Admin statistics | Actual database counts |
+
+## Address test matrix
+
+Verify:
+
+| Test | Expected result |
+|---|---|
+| Initial address form | No arbitrary preselected location |
+| Division dropdown | All supported divisions |
+| District dropdown | Only selected division's districts |
+| Upazila dropdown | Only selected district's upazilas |
+| Union/Area dropdown | Only selected upazila's valid areas |
+| Parent selection change | All dependent selections reset |
+| Search | Correct matching options |
+| Bangla names | Correct display |
+| English names | Correct display where supported |
+| Backend validation | Invalid combinations rejected |
+| Database persistence | Correct geographic identifiers |
+| Checkout submission | Correct address saved |
+| Order details | Correct address displayed |
+| Historical orders | Original address preserved |
+| Customer profile | Saved address works |
+| Admin Panel | Correct address information |
+| Mobile form | All dropdowns usable |
+
+## Regression tests
+
+After both tasks, verify that the following existing NOVARA features still work:
+
+- Registration.
+- Login.
+- Logout.
+- User profile.
+- Navigation bar.
+- Product browsing.
+- Product details.
+- Cart.
+- Checkout.
+- Payment.
+- Order creation.
+- Order history.
+- Wishlist.
+- Admin Panel.
+- Admin order management.
+- Existing delivery functionality.
+- Existing API routes.
+
+Do not claim that tests passed unless they were actually executed.
+
+---
+
+# PHASE 6 — FINAL PRODUCTION AUDIT REPORT
+
+After completing the work, provide two separate implementation and verification reports.
+
+## REPORT A — AUTHENTICATION
+
+Include:
+
+- Existing implementation inspected.
+- Google OAuth findings.
+- Facebook OAuth findings.
+- Email/Password findings.
+- Root causes discovered.
+- Fixes applied.
+- Database verification.
+- Session verification.
+- Navigation avatar verification.
+- Admin statistics verification.
+- Actual test results.
+- External configuration still required.
+
+## REPORT B — BANGLADESH ADDRESS SYSTEM
+
+Include:
+
+- Previous address implementation.
+- Existing static data usage.
+- NPM packages evaluated.
+- Selected package and exact version.
+- Why that package was selected.
+- Geographic coverage verified.
+- Missing or unsupported geographic levels.
+- Frontend modifications.
+- Backend modifications.
+- API changes.
+- Database changes.
+- Migration details.
+- Checkout integration.
+- Order integration.
+- Customer profile integration.
+- Admin Panel integration.
+- Backward compatibility verification.
+- Actual test results.
+
+## FINAL STATUS TABLE
+
+Use only:
+
+- PASS
+- FAIL
+- BLOCKED
+- NOT TESTED
+- NOT APPLICABLE
+
+| Requirement | Status |
+|---|---|
+| Google OAuth real verification | |
+| Facebook OAuth real verification | |
+| Email/Password verification | |
+| Secure session management | |
+| Duplicate account prevention | |
+| Mobile authentication flow | |
+| Navigation avatar | |
+| Admin authentication statistics | |
+| NPM package compatibility | |
+| Complete division data | |
+| Complete district data | |
+| Upazila/Thana data | |
+| Union/Area data | |
+| Cascading dropdown behavior | |
+| Backend geographic validation | |
+| Database persistence | |
+| Checkout integration | |
+| Order address integration | |
+| Historical address preservation | |
+| Customer saved addresses | |
+| Admin address display | |
+| Desktop verification | |
+| Mobile verification | |
+| Regression testing | |
+
+### FINAL ACCEPTANCE RULES
+
+The work is complete only when:
+
+1. Existing Google authentication is genuinely verified and works.
+2. Existing Facebook authentication is genuinely verified and works.
+3. Email/Password authentication works correctly.
+4. No unnecessary authentication rewrite has been performed.
+5. The selected NPM package is genuinely installed and integrated.
+6. The geographic hierarchy is accurate and complete for the required areas.
+7. The cascading dropdowns work correctly.
+8. The backend independently validates the selected hierarchy.
+9. Database persistence works correctly.
+10. Checkout and order creation save the correct address.
+11. Existing order history remains intact.
+12. The Admin Panel displays the correct address information.
+13. Existing NOVARA functionality remains unaffected.
+14. Actual tests have been executed and their results reported.
+
+If an external OAuth credential, package limitation, missing geographic record, or deployment configuration prevents full verification, report it honestly.
+
+Never fabricate test results.
+
+Never claim production readiness without evidence.
+
+**BEGIN NOW: Inspect the complete NOVARA project, map both existing implementations, identify the root causes and dependencies, and execute these two tasks with minimal, safe, production-grade changes.**

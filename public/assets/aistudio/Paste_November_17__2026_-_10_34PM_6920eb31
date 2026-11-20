@@ -1,0 +1,1450 @@
+# NOVARA — MASTER PRODUCTION ENGINEERING AUDIT, SECURITY HARDENING, SCHEMA VALIDATION, BUSINESS LOGIC OPTIMIZATION, SCALABILITY, SEO & PREMIUM CART FLIGHT ANIMATION
+
+## ROLE
+
+Act as a Principal Software Architect, Staff Full-Stack Engineer, Application Security Engineer, Database Performance Architect, E-commerce Business Logic Specialist, DevOps Engineer, SEO Engineer, and Senior QA Automation Engineer.
+
+Your mission is to audit, improve, implement, and verify the existing NOVARA e-commerce application to meet professional production engineering standards.
+
+This is a complete project-wide engineering improvement task.
+
+The scope includes:
+
+1. Project-wide Schema Validation.
+2. Production-grade Business Logic.
+3. Application Security Hardening.
+4. Database Integrity and Performance.
+5. Large-scale Product Catalog Scalability.
+6. Cart and Quantity Business Logic.
+7. Premium Product-to-Cart Flight Animation.
+8. Backup and Disaster Recovery.
+9. SEO and Search Engine Optimization.
+10. Performance, Reliability, Testing, and Regression Verification.
+
+**This is not a frontend-only task. Frontend, backend, API, database, authentication, authorization, Admin Panel, and infrastructure-related application configuration must work together correctly.**
+
+---
+
+# PHASE 1 — COMPLETE PROJECT ARCHITECTURE AUDIT
+
+Before modifying any code, inspect and understand the entire existing NOVARA codebase.
+
+Do not immediately start writing code.
+
+### Inspect the complete architecture
+
+**Frontend**
+
+- React components.
+- TypeScript types.
+- Pages and layouts.
+- Routing.
+- Authentication state.
+- Cart state management.
+- Product listing.
+- Product details.
+- Product cards.
+- Checkout.
+- Wishlist.
+- User profile.
+- Navigation bar.
+- Admin Panel.
+- Existing animation utilities.
+- Error boundaries.
+- Loading and empty states.
+
+**Backend**
+
+- Node.js and Express architecture.
+- API routes.
+- Controllers.
+- Services.
+- Middleware.
+- Authentication.
+- Authorization.
+- Request validation.
+- Business logic.
+- Error handling.
+- Logging.
+- Rate limiting.
+- File and image upload handling.
+
+**Database**
+
+- Existing database technology.
+- Schemas and models.
+- Relationships.
+- Indexes.
+- Unique constraints.
+- Foreign keys where applicable.
+- Database transactions.
+- Product and variant relationships.
+- Cart persistence.
+- Order persistence.
+- User relationships.
+- Inventory management.
+- Existing migrations.
+
+**Infrastructure and performance**
+
+- Environment configuration.
+- Production build.
+- Deployment configuration.
+- Caching.
+- Image optimization.
+- API performance.
+- Database connection management.
+- Backup mechanisms.
+- Existing testing framework.
+
+### Required outcome
+
+Create an internal architecture map showing how the current system works.
+
+Identify:
+
+- Duplicate logic.
+- Missing validation.
+- Inconsistent business rules.
+- Security vulnerabilities.
+- Database performance problems.
+- Unnecessary API requests.
+- Inefficient database queries.
+- Race conditions.
+- Scalability bottlenecks.
+- Existing working functionality that must be preserved.
+
+Do not rebuild working modules unnecessarily.
+
+---
+
+# PHASE 2 — PROJECT-WIDE PRODUCTION SCHEMA VALIDATION
+
+Implement a consistent and professional validation architecture throughout the entire application.
+
+Validation must exist at the correct boundaries, not just inside frontend forms.
+
+## 2.1 Frontend validation
+
+Inspect and validate every relevant user-facing form.
+
+Examples:
+
+- Registration.
+- Login.
+- User profile.
+- Product creation.
+- Product editing.
+- Product variants.
+- Product attributes.
+- Categories.
+- Brands.
+- Reviews.
+- Cart.
+- Checkout.
+- Delivery address.
+- Coupon codes.
+- Payment initiation.
+- Order management.
+- Admin settings.
+- Banner management.
+- Navigation management.
+
+Requirements:
+
+- Required field validation.
+- Correct data types.
+- String length restrictions.
+- Numeric limits.
+- Email validation.
+- Phone number validation.
+- URL validation.
+- File type validation.
+- File size validation.
+- Quantity validation.
+- Price validation.
+- Date validation.
+- Nested object validation.
+- Array validation.
+- Variant validation.
+- Cross-field validation.
+
+Use the existing validation library if it is appropriate.
+
+If the project uses Zod, Yup, Joi, or another established solution, inspect and extend the existing implementation.
+
+Do not introduce multiple competing validation systems without a clear technical reason.
+
+## 2.2 Backend validation
+
+Every API endpoint receiving external input must validate the request.
+
+Validate:
+
+- Request body.
+- URL parameters.
+- Query parameters.
+- Headers where applicable.
+- Uploaded files.
+- Nested objects.
+- Array elements.
+- Pagination parameters.
+- Sorting parameters.
+- Filter parameters.
+
+Reject malformed or unauthorized input before it reaches sensitive business logic.
+
+Never rely on frontend validation as a security boundary.
+
+## 2.3 Shared validation architecture
+
+Where appropriate, create reusable validation modules and schemas.
+
+Use consistent validation conventions between frontend and backend when the existing architecture permits.
+
+Examples of logical schema modules:
+
+- UserSchema.
+- ProductSchema.
+- ProductVariantSchema.
+- CategorySchema.
+- BrandSchema.
+- CartSchema.
+- CartItemSchema.
+- CheckoutSchema.
+- AddressSchema.
+- OrderSchema.
+- PaymentSchema.
+- CouponSchema.
+- ReviewSchema.
+- AdminSettingsSchema.
+
+These are examples, not mandatory new files.
+
+Reuse existing schemas wherever possible.
+
+## 2.4 Database-level validation
+
+Application-level validation is not enough.
+
+Enforce database integrity using appropriate:
+
+- Required fields.
+- Unique indexes.
+- Foreign key constraints.
+- Check constraints where supported.
+- Appropriate data types.
+- Referential integrity.
+- Transaction boundaries.
+- Safe defaults.
+- Nullable field rules.
+
+Prevent invalid records from entering the database even if an API validation layer is accidentally bypassed.
+
+### Important rules
+
+- Do not accept negative prices.
+- Do not accept invalid product quantities.
+- Do not accept invalid stock values.
+- Do not allow duplicate identifiers.
+- Do not allow invalid order relationships.
+- Do not allow invalid payment references.
+- Do not allow unauthorized user ownership changes.
+- Do not allow invalid product-variant relationships.
+
+Preserve existing valid historical records.
+
+Use safe migrations rather than destructive schema resets.
+
+---
+
+# PHASE 3 — PRODUCTION-GRADE BUSINESS LOGIC AUDIT
+
+Audit the business logic across the entire NOVARA application.
+
+The objective is to make the system predictable, consistent, secure, maintainable, and reliable.
+
+### Product management
+
+Verify:
+
+- Product creation.
+- Product editing.
+- Product deletion or archival.
+- Product status.
+- Product pricing.
+- Discount calculation.
+- Product variants.
+- Product attributes.
+- Category relationships.
+- Brand relationships.
+- Product images.
+- Stock management.
+- Search.
+- Filtering.
+- Sorting.
+- Pagination.
+- Product availability.
+
+### Pricing rules
+
+Implement consistent server-side pricing calculations.
+
+Validate:
+
+- Product price.
+- Variant price.
+- Discount.
+- Sale price.
+- Coupon discount.
+- Shipping charge.
+- Tax, if applicable.
+- Final payable amount.
+
+Never trust totals submitted by the frontend.
+
+The backend must calculate or independently verify the final amount using authoritative database values.
+
+Use appropriate decimal or integer minor-unit representations for monetary values.
+
+Avoid floating-point arithmetic errors.
+
+### Order management
+
+Verify:
+
+- Order creation.
+- Order item snapshots.
+- Order totals.
+- Payment status.
+- Order status.
+- Inventory reservation and deduction.
+- Cancellation.
+- Refund handling.
+- Order history.
+- Admin order management.
+
+Use explicit and validated state transitions.
+
+Prevent unauthorized or invalid order status changes.
+
+Never allow a cancelled, unpaid, or failed order to be treated as successfully paid without the appropriate verified payment process.
+
+### Inventory management
+
+Implement concurrency-safe inventory handling.
+
+Requirements:
+
+- Prevent negative inventory.
+- Prevent overselling.
+- Validate stock before order confirmation.
+- Handle simultaneous purchases.
+- Handle cancellation and inventory restoration.
+- Avoid duplicate inventory deduction.
+- Keep stock and order state consistent.
+
+Use atomic database operations, transactions, optimistic concurrency, or suitable locking mechanisms based on the existing database.
+
+---
+
+# PHASE 4 — CRITICAL CART BUSINESS LOGIC
+
+## 4.1 Correct definition of Cart Counter
+
+The NOVARA navigation bar Cart Counter must represent:
+
+**The number of unique cart line items, not the sum of all product quantities.**
+
+This is a strict business requirement.
+
+Example:
+
+| Product | Quantity | Cart Counter contribution |
+|---|---:|---:|
+| Product A | 1 | 1 |
+| Product A | 5 | 1 |
+| Product A | 10 | 1 |
+| Product B | 2 | 1 |
+| Product C | 3 | 1 |
+
+If the cart contains:
+
+- Product A: Quantity 5.
+- Product B: Quantity 2.
+- Product C: Quantity 3.
+
+The result must be:
+
+<pre>
+Unique Cart Items = 3
+Total Product Quantity = 10
+Navbar Cart Counter = 3
+</pre>
+
+Never calculate the navigation counter by summing quantities.
+
+## 4.2 Product card Add to Cart behavior
+
+When a user clicks Add to Cart on a product card:
+
+1. Identify the authenticated user or guest cart.
+2. Identify the exact product and required variant.
+3. Validate product availability.
+4. Check whether the same product/variant already exists in the cart.
+5. If it does not exist, create a cart line with quantity 1.
+6. If it already exists, do not increment its quantity merely because the Add to Cart button was clicked again.
+7. Update the cart state correctly.
+8. Update the Navbar Cart Counter based on unique cart lines.
+9. Display an appropriate success notification.
+
+### Repeated-click example
+
+User clicks the same product's Add to Cart button ten times.
+
+Expected result:
+
+- Unique cart lines: 1.
+- Product quantity: 1.
+- Navbar Cart Counter: 1.
+- No duplicate cart records.
+- No unintended quantity increase.
+
+This behavior must be consistent in both frontend and backend.
+
+Do not rely only on disabling the button after one click.
+
+Implement server-side idempotent cart behavior.
+
+## 4.3 Product details quantity behavior
+
+On the Product Details page:
+
+- Default quantity must be 1.
+- The user may increase or decrease quantity.
+- Minimum quantity must be 1.
+- Maximum quantity must respect available stock and business rules.
+- Invalid quantities must be rejected.
+- Quantity must be validated by the backend.
+
+Example:
+
+User selects Product A and increases quantity to 5.
+
+Expected result:
+
+- Unique cart lines: 1.
+- Product A quantity: 5.
+- Navbar Cart Counter: 1.
+- Product subtotal: Unit price × 5.
+
+If Product A already exists in the cart, use a clearly defined desired-quantity policy.
+
+For this project, when the user adds a product from the Product Details page with a selected quantity, set the existing matching cart line to the newly selected desired quantity rather than blindly adding it again.
+
+Do not accidentally turn a desired quantity into an additional quantity.
+
+## 4.4 Product identity and variants
+
+A cart line must be identified using the appropriate combination of:
+
+- Product ID.
+- Selected variant ID or option combination.
+- Other purchase-defining configuration, if applicable.
+
+The same product with a different size, color, storage option, or other purchasable variant may be a separate cart line.
+
+Do not merge different variants into one cart line.
+
+Do not create duplicate lines for the same exact product configuration.
+
+## 4.5 Cart backend and database
+
+Inspect the existing cart model and APIs.
+
+Ensure that:
+
+- User ownership is correct.
+- Guest cart behavior is preserved.
+- Cart persistence works.
+- Duplicate line items are prevented.
+- Quantity is validated.
+- Stock is checked.
+- Prices are recalculated on the server.
+- Cart data survives refresh.
+- Cart merges correctly after login, if supported.
+- Cart operations are safe under concurrent requests.
+
+Use suitable unique constraints or equivalent transactional logic.
+
+If using a database that supports atomic update operations, use them appropriately.
+
+Never trust client-submitted product prices or calculated totals.
+
+## 4.6 Cart count calculation
+
+Create or reuse one authoritative cart-count calculation.
+
+Logical definition:
+
+<pre>
+cartCount = number of distinct valid cart lines
+</pre>
+
+Do not use:
+
+<pre>
+cartCount = sum of all item quantities
+</pre>
+
+Ensure the same calculation is used consistently across:
+
+- Navigation bar.
+- Cart page.
+- Mini cart.
+- Cart sidebar, if present.
+- Cart API responses.
+- User account session restoration.
+
+The counter must update immediately after a successful cart operation.
+
+Avoid inconsistent counts caused by duplicated state management.
+
+## 4.7 Cart synchronization
+
+Verify:
+
+- Add product.
+- Repeated Add to Cart.
+- Increase quantity.
+- Decrease quantity.
+- Remove product.
+- Change variant where supported.
+- Clear cart.
+- Refresh page.
+- Logout.
+- Login.
+- Guest-to-user cart merge.
+- Multiple tabs, where supported.
+- Stock changes after an item enters the cart.
+
+The cart should remain consistent with the server's authoritative state.
+
+---
+
+# PHASE 5 — PREMIUM PRODUCT-TO-CART FLIGHT ANIMATION
+
+Implement a premium product image flight animation when the user clicks Add to Cart.
+
+The effect should feel polished, smooth, natural, and professional.
+
+## 5.1 Expected animation
+
+When a user clicks Add to Cart on a product card:
+
+1. Capture the actual product image and its visible screen position.
+2. Identify the destination Navbar Cart Icon position.
+3. Create a temporary visual representation of the product image.
+4. Animate the image from the product card toward the Navbar Cart Icon.
+5. Use a smooth, controlled, natural motion.
+6. Gradually reduce the image size.
+7. Add a subtle rotation or scale effect if visually appropriate.
+8. End the animation at the cart icon.
+9. Remove the temporary animation element.
+10. Update the cart icon with a subtle confirmation animation.
+
+### Visual quality
+
+The animation must be:
+
+- Premium.
+- Smooth.
+- Elegant.
+- Responsive.
+- Lightweight.
+- Consistent with the NOVARA design system.
+
+Avoid:
+
+- Extremely fast movement.
+- Abrupt disappearance.
+- Excessive bouncing.
+- Unnecessary particle effects.
+- Distracting animations.
+- Layout shifts.
+- Multiple conflicting animations.
+
+The movement should be slow enough to be visually enjoyable but not so slow that it delays the shopping experience.
+
+Use a carefully tuned duration appropriate to the layout and device.
+
+## 5.2 Animation architecture
+
+Reuse the existing animation library if the project already has one.
+
+If no suitable solution exists, use an appropriately lightweight implementation.
+
+Possible approaches include:
+
+- Framer Motion.
+- Motion.
+- CSS transforms.
+- RequestAnimationFrame where appropriate.
+
+Do not install unnecessary animation dependencies.
+
+Use a temporary overlay or equivalent mechanism.
+
+Important implementation details:
+
+- Use the real product image.
+- Calculate source and destination positions dynamically.
+- Handle responsive navbar positions.
+- Handle scrolling.
+- Handle different product card layouts.
+- Handle sticky headers.
+- Handle mobile navigation.
+- Handle unavailable image sources.
+- Clean up temporary DOM elements.
+- Prevent memory leaks.
+- Avoid unnecessary React re-renders.
+- Do not interfere with product-card navigation.
+- Respect reduced-motion preferences.
+
+## 5.3 Animation accessibility
+
+Respect:
+
+`prefers-reduced-motion`
+
+If the user has requested reduced motion:
+
+- Disable or simplify the flight animation.
+- Preserve immediate cart functionality.
+- Show a subtle non-motion confirmation instead.
+
+The cart must work even if animation fails.
+
+**Animation must never control the actual cart business logic.**
+
+The cart operation should succeed independently, and the animation should be a visual enhancement only.
+
+## 5.4 Animation consistency
+
+Support:
+
+- Product card Add to Cart.
+- Product Details Add to Cart.
+- Responsive layouts.
+- Desktop.
+- Tablet.
+- Mobile.
+
+Use the correct source image and correct cart icon destination.
+
+Avoid animating the wrong image when multiple products are visible.
+
+Handle rapid successive user actions without leaving stale animation elements.
+
+---
+
+# PHASE 6 — APPLICATION SECURITY HARDENING
+
+Perform a comprehensive security audit of the complete application.
+
+Security must be enforced on the server and database, not just through frontend UI restrictions.
+
+Acknowledge that absolute immunity from hacking cannot be guaranteed. Implement defense-in-depth and reduce the attack surface.
+
+## 6.1 Authentication security
+
+Audit:
+
+- Password hashing.
+- OAuth token verification.
+- Session management.
+- Refresh tokens, if used.
+- Logout.
+- Session expiration.
+- Password reset.
+- Email verification.
+- Account linking.
+- Brute-force protection.
+
+Never store plaintext passwords.
+
+Never expose secrets or authentication tokens in browser responses.
+
+## 6.2 Authorization and access control
+
+Implement and verify:
+
+- Role-based access control.
+- Admin authorization.
+- User ownership checks.
+- Protected API routes.
+- Resource-level authorization.
+- Least-privilege permissions.
+
+Never rely on frontend route protection alone.
+
+A regular user must not be able to access another user's:
+
+- Cart.
+- Orders.
+- Address.
+- Profile.
+- Payment records.
+- Private information.
+
+Never trust user IDs supplied by the frontend when ownership can be derived from the authenticated session.
+
+## 6.3 Common attack prevention
+
+Audit and mitigate relevant risks from:
+
+- SQL injection.
+- NoSQL injection.
+- Cross-site scripting (XSS).
+- Cross-site request forgery (CSRF).
+- Broken access control.
+- Authentication bypass.
+- IDOR.
+- Mass assignment.
+- Prototype pollution.
+- Server-side request forgery (SSRF).
+- Path traversal.
+- Unsafe file uploads.
+- Malicious file types.
+- Denial-of-service attempts.
+- Brute-force attacks.
+- Credential stuffing.
+- Open redirects.
+- Session fixation.
+- Sensitive information exposure.
+
+Use parameterized database queries or safe ORM operations.
+
+Never pass arbitrary user-controlled objects directly into database update operations.
+
+Validate file uploads by content, size, type, and allowed destination.
+
+## 6.4 API security
+
+Verify:
+
+- Rate limiting.
+- Authentication middleware.
+- Authorization middleware.
+- Request validation.
+- Safe error responses.
+- CORS configuration.
+- Security headers.
+- Request size limits.
+- Pagination limits.
+- Search/filter restrictions.
+- Sensitive endpoint protection.
+
+Avoid unrestricted public endpoints.
+
+Do not expose internal stack traces in production responses.
+
+## 6.5 Secret management
+
+- Keep database credentials server-side.
+- Keep OAuth client secrets server-side.
+- Keep payment gateway secrets server-side.
+- Never commit production secrets.
+- Never expose secrets in frontend environment variables.
+- Use separate development, staging, and production configuration.
+- Rotate credentials when compromise is suspected.
+
+## 6.6 Audit logging and monitoring
+
+Implement or improve structured logging for security-relevant events:
+
+- Failed login attempts.
+- Successful authentication.
+- Admin actions.
+- Permission failures.
+- Suspicious request patterns.
+- Order state changes.
+- Payment state changes.
+- Important inventory operations.
+
+Do not log plaintext passwords, access tokens, card details, CVV, or sensitive secrets.
+
+Use appropriate log retention and access controls.
+
+---
+
+# PHASE 7 — DATABASE SCALABILITY & LARGE PRODUCT CATALOG SUPPORT
+
+NOVARA must be architected to support substantial future growth, including hundreds of thousands of products and potentially larger datasets.
+
+Do not optimize based on assumptions alone.
+
+Inspect actual query patterns and measure performance.
+
+## 7.1 Database indexing
+
+Audit all high-traffic database queries.
+
+Create appropriate indexes for:
+
+- Product slug.
+- Product status.
+- Product category.
+- Product brand.
+- Product creation date.
+- Product price where frequently filtered.
+- Product search fields.
+- Variant relationships.
+- Inventory lookups.
+- Cart ownership.
+- Order ownership.
+- Order status.
+- Order creation date.
+- Payment transaction references.
+- User email.
+- Provider identities.
+- Relevant foreign keys.
+
+Use compound indexes where the query patterns justify them.
+
+Do not blindly index every field.
+
+Too many indexes increase storage and write costs.
+
+Use database query plans and execution statistics where available.
+
+## 7.2 Efficient product queries
+
+Avoid:
+
+- Loading every product at once.
+- Unbounded database queries.
+- N+1 query patterns.
+- Repeated unnecessary population.
+- Large unnecessary document projections.
+- Loading unused images and fields.
+- Fetching all product variants when not required.
+
+Implement:
+
+- Server-side pagination.
+- Efficient filtering.
+- Sorting.
+- Search.
+- Selective field projection.
+- Proper query limits.
+- Appropriate cursor-based pagination where useful.
+
+Do not use frontend-only filtering for very large product datasets.
+
+## 7.3 Search architecture
+
+Inspect the existing search implementation.
+
+Improve it according to the current database and project requirements.
+
+Consider:
+
+- Indexed search.
+- Search normalization.
+- Category filters.
+- Brand filters.
+- Price filters.
+- Availability filters.
+- Pagination.
+- Sorting.
+- Debounced frontend requests.
+
+Do not introduce a separate search infrastructure unless measurements and project requirements justify it.
+
+## 7.4 Caching
+
+Implement caching only where it is safe and useful.
+
+Potential candidates:
+
+- Public product catalog data.
+- Category lists.
+- Brand lists.
+- Public configuration.
+- Frequently accessed read-only data.
+
+Use appropriate cache invalidation when data changes.
+
+Never serve stale prices, stock availability, payment status, or security-sensitive user data as authoritative.
+
+If Redis or another cache is already present, reuse it appropriately.
+
+Do not add infrastructure dependencies without a clear reason.
+
+## 7.5 Database connection management
+
+Verify:
+
+- Connection pooling.
+- Connection limits.
+- Query timeouts.
+- Retry behavior.
+- Graceful shutdown.
+- Database unavailable handling.
+- Transaction safety.
+
+Prevent connection leaks and uncontrolled connection creation.
+
+## 7.6 Load and performance testing
+
+Use realistic test datasets.
+
+Test product browsing and search with large datasets, including a representative dataset of at least 100,000 products when the environment permits.
+
+Measure:
+
+- Query latency.
+- Pagination performance.
+- Memory usage.
+- API response time.
+- Database load.
+- Error rate.
+- Concurrent request behavior.
+
+Do not create fake claims about performance.
+
+Report actual measured results and the test environment.
+
+---
+
+# PHASE 8 — BACKUP, RECOVERY & DATA PROTECTION
+
+Implement a professional backup and recovery strategy appropriate to the existing database and deployment environment.
+
+### Backup requirements
+
+- Scheduled automated backups.
+- Configurable retention policy.
+- Encrypted backups where supported.
+- Secure backup storage.
+- Backup integrity verification.
+- Database restoration procedure.
+- Recovery documentation.
+
+Define appropriate:
+
+- Recovery Point Objective (RPO).
+- Recovery Time Objective (RTO).
+
+Do not invent these values as guaranteed performance targets. Propose realistic targets based on the deployment environment.
+
+### Important
+
+A backup is not proven usable until restoration has been tested.
+
+Perform a controlled restore test in a non-production environment when access permits.
+
+Never run destructive restore operations against production without explicit authorization.
+
+Do not reset or delete existing production data.
+
+---
+
+# PHASE 9 — PRODUCTION SEO OPTIMIZATION
+
+Audit and improve SEO across the public NOVARA storefront.
+
+Preserve existing URL structures wherever possible.
+
+## 9.1 Technical SEO
+
+Implement or verify:
+
+- Unique page titles.
+- Meta descriptions.
+- Canonical URLs.
+- Robots directives.
+- XML sitemap.
+- robots.txt.
+- Clean URLs.
+- Proper heading hierarchy.
+- Open Graph metadata.
+- Social sharing metadata.
+- Correct HTTP status codes.
+- Redirect handling.
+- Duplicate content prevention.
+
+## 9.2 Product SEO
+
+Each public product page should support:
+
+- Unique product title.
+- Product description.
+- SEO title.
+- Meta description.
+- Canonical URL.
+- Product image metadata.
+- Relevant structured data.
+- Accurate availability.
+- Correct pricing information.
+
+Use Product structured data according to Google's supported schema guidelines.
+
+Do not output misleading ratings, prices, availability, or review information.
+
+## 9.3 Structured data
+
+Implement relevant JSON-LD where appropriate:
+
+- Organization.
+- WebSite.
+- BreadcrumbList.
+- Product.
+- Offer.
+- AggregateRating only when genuine data supports it.
+
+Ensure structured data matches the actual visible page content.
+
+## 9.4 Performance SEO
+
+Audit:
+
+- Core Web Vitals.
+- LCP.
+- INP.
+- CLS.
+- Image optimization.
+- Responsive image loading.
+- Lazy loading.
+- Font loading.
+- JavaScript bundle size.
+- Render-blocking resources.
+
+Do not lazy-load the main above-the-fold hero or primary product image unnecessarily if it harms LCP.
+
+Do not claim Google ranking improvements as guaranteed.
+
+---
+
+# PHASE 10 — ERROR HANDLING & OBSERVABILITY
+
+Ensure the application behaves predictably when something fails.
+
+Implement or improve:
+
+- Centralized backend error handling.
+- Frontend error boundaries.
+- Structured logging.
+- Request correlation IDs.
+- Safe validation errors.
+- Database error handling.
+- API timeout handling.
+- Retry strategies where safe.
+- User-friendly error states.
+- Monitoring and alerting integration where supported.
+
+Never swallow important errors silently.
+
+Never expose sensitive internal error details to end users.
+
+---
+
+# PHASE 11 — AUTOMATED TESTING & REGRESSION VERIFICATION
+
+Implement tests based on the existing project testing infrastructure.
+
+## 11.1 Schema validation tests
+
+Test:
+
+- Valid input.
+- Missing required fields.
+- Incorrect types.
+- Invalid nested data.
+- Invalid arrays.
+- Negative prices.
+- Invalid quantities.
+- Invalid stock.
+- Unauthorized fields.
+- Invalid relationships.
+
+## 11.2 Business logic tests
+
+Test:
+
+- Product pricing.
+- Discount calculation.
+- Coupon validation.
+- Stock validation.
+- Order creation.
+- Order state transitions.
+- Inventory updates.
+- Cancellation.
+- Refund rules where supported.
+
+## 11.3 Cart tests — mandatory
+
+Test the following exact scenarios:
+
+**Scenario A: Repeated product-card clicks**
+
+- Click Add to Cart once.
+- Expected counter: 1.
+- Expected quantity: 1.
+
+Click the same Add to Cart button ten times.
+
+Expected:
+
+- Unique cart lines: 1.
+- Quantity: 1.
+- Navbar counter: 1.
+
+**Scenario B: Product Details quantity selection**
+
+- Select quantity 5.
+- Click Add to Cart.
+
+Expected:
+
+- Unique cart lines: 1.
+- Quantity: 5.
+- Navbar counter: 1.
+- Subtotal: Unit price × 5.
+
+**Scenario C: Different products**
+
+- Add Product A.
+- Add Product B.
+- Add Product C.
+
+Expected:
+
+- Unique cart lines: 3.
+- Navbar counter: 3.
+
+**Scenario D: Different variants**
+
+- Add Product A, Size M.
+- Add Product A, Size L.
+
+Expected:
+
+- Unique cart lines: 2.
+- Each variant maintains its own quantity.
+
+**Scenario E: Quantity updates**
+
+- Change Product A quantity from 1 to 5.
+
+Expected:
+
+- Navbar counter remains unchanged.
+- Subtotal updates correctly.
+- Cart total updates correctly.
+
+**Scenario F: Removal**
+
+- Remove one product line.
+
+Expected:
+
+- Unique cart line count decreases by 1.
+- Remaining quantities remain correct.
+
+**Scenario G: Refresh**
+
+- Add products.
+- Refresh the page.
+
+Expected:
+
+- Cart contents persist.
+- Quantities remain correct.
+- Navbar count remains correct.
+
+**Scenario H: Concurrent requests**
+
+- Send multiple simultaneous Add to Cart requests for the same product configuration.
+
+Expected:
+
+- No duplicate cart lines.
+- No unintended quantity increments.
+- Consistent database state.
+
+## 11.4 Animation tests
+
+Verify:
+
+- Product image is captured correctly.
+- Flight starts from the correct product.
+- Destination is the correct Navbar Cart Icon.
+- Animation works after scrolling.
+- Animation works with sticky headers.
+- Animation works on mobile.
+- Animation handles broken image sources.
+- Rapid clicks do not leave stale elements.
+- Reduced-motion preference is respected.
+- Cart operation succeeds independently of animation.
+
+## 11.5 Security tests
+
+Test relevant:
+
+- Unauthorized requests.
+- User ownership violations.
+- Admin access violations.
+- Invalid authentication.
+- Injection attempts.
+- XSS payloads.
+- CSRF protection where applicable.
+- Rate limiting.
+- Malicious file uploads.
+- Mass assignment.
+- Invalid API payloads.
+
+Perform safe, authorized security testing only.
+
+## 11.6 Regression tests
+
+Verify that these existing modules continue to work:
+
+- Authentication.
+- Google/Facebook login.
+- User profile.
+- Navigation.
+- Product management.
+- Product variants.
+- Product attributes.
+- Categories.
+- Brands.
+- Product details.
+- Cart.
+- Wishlist.
+- Checkout.
+- Payment.
+- Orders.
+- Delivery address.
+- Admin Panel.
+- Banner management.
+- Navigation management.
+- Reviews.
+- Analytics.
+
+---
+
+# PHASE 12 — STRICT PROJECT PRESERVATION
+
+This is one of the most important requirements.
+
+Do not unnecessarily change:
+
+- Existing functions.
+- Existing components.
+- Existing URLs.
+- Existing API contracts.
+- Existing page designs.
+- Existing routes.
+- Existing business workflows.
+- Existing authentication.
+- Existing payment logic.
+- Existing database relationships.
+
+Do not delete working code just to replace it with a new implementation.
+
+Do not rewrite the whole application.
+
+Do not introduce unnecessary dependencies.
+
+Do not create duplicate utilities or competing business logic.
+
+Before modifying an existing module:
+
+1. Identify its dependencies.
+2. Identify all callers.
+3. Understand its current behavior.
+4. Determine backward compatibility.
+5. Make a targeted change.
+6. Verify all affected callers.
+
+Maintain existing interfaces wherever practical.
+
+---
+
+# PHASE 13 — FINAL PRODUCTION READINESS REPORT
+
+After implementation, produce a detailed report.
+
+## A. Project audit
+
+- Architecture inspected.
+- Existing issues discovered.
+- Root causes.
+- Existing modules reused.
+- Files modified.
+- New files created.
+- Dependencies added or removed.
+
+## B. Schema validation report
+
+- Frontend validation.
+- Backend validation.
+- Database constraints.
+- Shared validation architecture.
+- Validation tests.
+
+## C. Business logic report
+
+- Product logic.
+- Pricing logic.
+- Inventory logic.
+- Order logic.
+- Cart logic.
+- Error handling.
+- Concurrency handling.
+
+## D. Cart implementation report
+
+- Unique cart item count.
+- Quantity behavior.
+- Variant identity.
+- Backend idempotency.
+- Database consistency.
+- Navigation count synchronization.
+- Flight animation.
+- Mobile behavior.
+- Accessibility.
+
+## E. Security audit report
+
+List each vulnerability category inspected.
+
+For each finding, provide:
+
+- Severity.
+- Root cause.
+- Affected module.
+- Fix applied.
+- Test evidence.
+- Remaining risk.
+
+Do not claim that the application is completely unhackable.
+
+## F. Scalability and database report
+
+- Database indexes.
+- Query optimization.
+- Pagination.
+- Caching.
+- Connection management.
+- Load test results.
+- Memory and latency observations.
+
+## G. Backup and recovery report
+
+- Backup configuration.
+- Retention.
+- Encryption.
+- Restore test.
+- Recovery limitations.
+
+## H. SEO report
+
+- Metadata.
+- Canonical URLs.
+- Sitemap.
+- robots.txt.
+- Structured data.
+- Core Web Vitals audit.
+- Remaining issues.
+
+## I. Final status matrix
+
+Use only:
+
+- PASS
+- FAIL
+- BLOCKED
+- NOT TESTED
+- NOT APPLICABLE
+
+| Requirement | Status |
+|---|---|
+| Complete architecture audit | |
+| Frontend schema validation | |
+| Backend schema validation | |
+| Database constraints | |
+| Production business logic | |
+| Secure pricing calculations | |
+| Inventory concurrency | |
+| Unique cart item counter | |
+| Repeated-click idempotency | |
+| Product details quantity behavior | |
+| Variant-specific cart lines | |
+| Cart database persistence | |
+| Navbar counter synchronization | |
+| Premium flight animation | |
+| Mobile animation | |
+| Reduced-motion support | |
+| Authentication security | |
+| Authorization security | |
+| API security | |
+| Database query optimization | |
+| Large catalog performance | |
+| Backup configuration | |
+| Restore verification | |
+| Technical SEO | |
+| Product SEO | |
+| Security tests | |
+| Regression tests | |
+
+---
+
+# FINAL ACCEPTANCE CRITERIA
+
+The task is complete only when:
+
+1. The complete project has been inspected.
+2. Existing architecture has been preserved.
+3. Schema validation is consistently enforced.
+4. Business logic is reliable and server-authoritative.
+5. Cart Counter counts unique cart lines, not quantities.
+6. Repeated Add to Cart clicks do not increase quantity.
+7. Product Details quantity selection works correctly.
+8. Different variants remain separate cart lines.
+9. Cart state persists correctly.
+10. The premium flight animation works without affecting business logic.
+11. Backend and database security controls are enforced.
+12. Product catalog queries are optimized for large datasets.
+13. Database backup and recovery procedures are documented and tested where possible.
+14. SEO improvements are correctly implemented.
+15. Critical tests pass.
+16. Existing NOVARA functionality remains intact.
+
+**Never mark a requirement PASS without actual verification.**
+
+If infrastructure, production credentials, load-testing resources, or deployment access are unavailable, mark the relevant item BLOCKED or NOT TESTED.
+
+Do not fabricate performance benchmarks, security audit results, backup success, or production readiness.
+
+### FINAL EXECUTION INSTRUCTION
+
+Start by inspecting the complete existing NOVARA codebase.
+
+Create a technical dependency map.
+
+Identify real defects and bottlenecks.
+
+Prepare a minimal-change implementation plan.
+
+Implement the improvements in safe, logical stages.
+
+Run targeted tests after each stage.
+
+Run the complete regression suite at the end.
+
+Preserve all unrelated functionality, design, components, routes, URLs, and existing business logic.
+
+**Your goal is not merely to make NOVARA look professional. Your goal is to make its actual engineering, security, data integrity, business logic, scalability, and user experience professionally production-ready.**

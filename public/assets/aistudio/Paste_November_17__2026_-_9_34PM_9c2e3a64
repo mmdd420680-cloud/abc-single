@@ -1,0 +1,1036 @@
+# NOVARA — Complete Production-Grade Google & Facebook OAuth Authentication, Backend, Database, Admin Analytics & User Identity System
+
+## ROLE & EXECUTION STANDARD
+
+Act as a Principal Software Architect, Senior Full-Stack Engineer, OAuth 2.0 / OpenID Connect Specialist, Backend Security Engineer, Database Architect, QA Automation Engineer, and Production Readiness Auditor.
+
+Your task is to inspect, understand, implement, integrate, test, and verify a complete production-grade Google and Facebook authentication system inside the existing NOVARA e-commerce project.
+
+**This is NOT a frontend-only task.**
+
+The implementation must cover the complete application:
+
+- Frontend authentication UI.
+- Backend authentication architecture.
+- OAuth 2.0 / OpenID Connect integration.
+- API routes and controllers.
+- Authentication services and middleware.
+- Database schemas, migrations, and relationships.
+- User registration, login, logout, and account linking.
+- Secure session/token management.
+- Profile image and avatar management.
+- Navigation bar account identity integration.
+- Admin Panel provider-wise registration analytics.
+- Error handling, security, testing, and production configuration.
+
+A button that merely opens a Google or Facebook page is NOT a completed implementation. A simulated successful login is NOT acceptable. A frontend-only implementation is strictly prohibited.
+
+---
+
+# PHASE 1 — COMPLETE PROJECT INSPECTION BEFORE CODING
+
+Before modifying anything, thoroughly inspect the existing NOVARA codebase.
+
+Read and understand:
+
+1. Complete frontend architecture.
+2. Existing registration and login pages.
+3. Google and Facebook login buttons and their current implementation.
+4. Existing authentication context, hooks, state management, and utilities.
+5. Backend architecture and existing authentication modules.
+6. All API routes and route registration mechanisms.
+7. Controllers, services, middleware, and validation layers.
+8. Database schema, models, migrations, and user relationships.
+9. Existing user profile and account management functionality.
+10. Navigation bar and account dropdown components.
+11. Admin Panel architecture, dashboard, analytics, and user management.
+12. Existing environment variables and configuration conventions.
+13. Existing routing, redirects, protected routes, and session handling.
+14. Existing testing framework and available test coverage.
+
+Trace the current authentication flow from the frontend button all the way to the backend, database, and final authenticated session.
+
+Identify exactly which parts are currently frontend-only, incomplete, incorrectly connected, insecure, or non-functional.
+
+### Critical preservation rule
+
+Do not unnecessarily modify:
+
+- Existing UI designs.
+- Existing page layouts.
+- Existing component structures.
+- Existing URLs and routes.
+- Existing API contracts.
+- Existing business logic.
+- Existing cart, checkout, order, wishlist, and payment systems.
+- Existing navigation behavior.
+- Existing working authentication functionality.
+
+Reuse and extend existing modules wherever possible.
+
+Do not create duplicate authentication systems, duplicate user tables, unnecessary parallel services, or conflicting API routes.
+
+Make the smallest safe, backward-compatible changes necessary.
+
+**Do not start implementation until you understand the existing architecture.**
+
+---
+
+# PHASE 2 — REAL GOOGLE OAUTH 2.0 / OPENID CONNECT INTEGRATION
+
+Implement a genuine Google authentication integration using Google's official OAuth 2.0 / OpenID Connect flow.
+
+Use the appropriate official Google authentication documentation and supported libraries compatible with the existing project architecture.
+
+### Required authentication flow
+
+1. User opens the NOVARA registration or login page.
+2. User clicks Continue with Google.
+3. The application initiates a real Google OAuth authorization request.
+4. The user is redirected to Google's official authentication interface.
+5. The user selects an existing Google account or signs in.
+6. Google authenticates the user.
+7. Google redirects to the registered NOVARA callback URL.
+8. The backend validates the OAuth response.
+9. The backend verifies the identity token and relevant claims.
+10. The backend retrieves the verified user identity.
+11. The backend creates a new NOVARA account or securely identifies an existing account.
+12. The database is updated correctly.
+13. A secure NOVARA session is established.
+14. The user is redirected to the appropriate NOVARA page.
+15. The navigation bar displays the authenticated user's identity.
+
+### Google verification requirements
+
+Implement:
+
+- Correct Google Client ID configuration.
+- Google Client Secret stored securely on the server.
+- Exact authorized redirect URI validation.
+- Authorization Code Flow.
+- PKCE where supported and appropriate.
+- State validation.
+- OIDC nonce validation where applicable.
+- ID token signature verification.
+- Issuer validation.
+- Audience validation.
+- Expiration validation.
+- Email verification claim handling.
+- Secure callback processing.
+- Error and cancellation handling.
+- Duplicate callback protection.
+- Secure session establishment.
+
+Never trust an email address, user ID, profile image URL, or authentication status submitted directly by the frontend.
+
+Never accept an unverified Google token as proof of identity.
+
+### Google account information
+
+Where Google provides the relevant information, securely retrieve and store:
+
+- Google provider ID (`sub`).
+- Verified email address.
+- Full name.
+- Given name, if available.
+- Family name, if available.
+- Profile image URL.
+- Email verification status.
+- Provider identification.
+- Account creation timestamp.
+- Last login timestamp.
+
+Handle missing optional profile fields gracefully.
+
+Never assume every Google account has a profile photo.
+
+---
+
+# PHASE 3 — REAL FACEBOOK OAUTH INTEGRATION
+
+Implement genuine Facebook Login using Meta's official OAuth flow and supported Graph API endpoints.
+
+The Facebook integration must work end-to-end, not merely display a Facebook login button.
+
+### Required flow
+
+1. User clicks Continue with Facebook.
+2. NOVARA initiates the official Facebook authorization flow.
+3. The user is redirected to Meta's authentication interface.
+4. The user signs in and authorizes the requested permissions.
+5. Facebook redirects to NOVARA's registered callback URL.
+6. The backend validates the OAuth response and state.
+7. The backend securely exchanges the authorization code for an access token.
+8. The backend retrieves the permitted user profile information.
+9. The backend verifies the provider identity.
+10. The backend creates or identifies the NOVARA user.
+11. The backend establishes a secure session.
+12. The frontend displays the user's actual account identity.
+
+### Facebook profile information
+
+Retrieve only the fields permitted by the approved Facebook permissions and current Graph API version.
+
+Where available, store:
+
+- Facebook provider ID.
+- Email address.
+- Name.
+- Profile picture URL.
+- Email verification information, where reliably available.
+- Provider identification.
+- Creation and last-login timestamps.
+
+Important: Facebook may not provide an email address in every case. Handle this situation properly.
+
+If Facebook does not provide an email address:
+
+- Do not invent one.
+- Do not create a fake email.
+- Do not silently link the account using an unverified identity.
+- Ask the user to provide and verify an email address if required by NOVARA's account policy.
+- Preserve the authenticated Facebook provider identity while completing the required profile step.
+
+Implement appropriate permission handling, denied permissions, expired tokens, revoked access, callback failures, and cancellation scenarios.
+
+---
+
+# PHASE 4 — GOOGLE & FACEBOOK BRANDING CONFIGURATION
+
+The NOVARA authentication experience must maintain consistent professional branding.
+
+### Frontend branding
+
+Use the existing NOVARA brand identity.
+
+The following should be configurable through the Admin Panel where technically appropriate:
+
+- Website/app name.
+- Main brand logo.
+- Authentication page logo.
+- Login page branding.
+- Registration page branding.
+- Google and Facebook login button visibility.
+- Provider button labels.
+- Authentication page brand assets.
+
+When the administrator updates the NOVARA logo, the frontend authentication pages should use the updated logo dynamically rather than requiring hardcoded image replacement.
+
+### Important provider-hosted UI limitation
+
+Google and Facebook control their own hosted authentication interfaces.
+
+Do not attempt to recreate, imitate, inject into, or manipulate Google's or Facebook's actual authentication pages.
+
+For Google:
+
+- Configure the application name and logo through the official Google Auth Platform branding configuration.
+- Configure the authorized domain.
+- Configure the authorized redirect URIs.
+- Complete the required consent-screen and verification procedures.
+
+For Facebook:
+
+- Configure the application name, app icon, privacy policy, domain, redirect URI, and required settings through Meta for Developers.
+- Complete any required app review and production access requirements.
+
+The NOVARA Admin Panel may manage the application's own branding configuration and display instructions or configuration status.
+
+Do not falsely claim that changing a logo in NOVARA's database automatically changes Google's or Meta's hosted OAuth branding. Those provider settings must be configured through their respective developer consoles unless an officially supported API permits the operation.
+
+### Expected result
+
+The authentication journey should look and behave like a professional production application, with consistent NOVARA branding wherever the provider permits it.
+
+---
+
+# PHASE 5 — COMPLETE EMAIL-FIRST AUTHENTICATION EXPERIENCE
+
+Audit and improve the existing email and password login flow.
+
+A critical requirement is that email input and password input must work correctly on both desktop and mobile.
+
+### Expected email-first behavior
+
+Step 1:
+
+- Display the email input field.
+- User enters their email address.
+- User clicks Continue.
+
+Step 2:
+
+- Validate the email format.
+- Determine the appropriate next authentication step without exposing whether an account exists to unauthorized visitors.
+- If the user proceeds through the existing-account login flow, display the password step.
+- Keep the email address visible or prefilled in the next step.
+- Provide a Back option to edit the email.
+- Allow the user to enter their password.
+- Authenticate through the real backend.
+- Establish the secure session.
+
+If the email does not correspond to an existing account, handle the situation through the appropriate registration flow without exposing sensitive account-enumeration information.
+
+### Registration behavior
+
+For email/password registration:
+
+- Name.
+- Email.
+- Password.
+- Password confirmation if supported by the existing design.
+- Email verification where required by the existing security policy.
+
+Validate all input on both frontend and backend.
+
+Password requirements must follow the application's security policy. Do not weaken existing password rules.
+
+### Mobile-specific issue — mandatory investigation
+
+There is a known class of bug in the current project where:
+
+- Email input works on desktop.
+- The email field appears on mobile.
+- The user enters an email.
+- The user clicks Continue.
+- The next step does not open correctly or the email is not carried forward.
+- Password input or form submission fails.
+
+Investigate the actual root cause instead of applying a cosmetic workaround.
+
+Check:
+
+- Responsive component rendering.
+- Conditional rendering.
+- Mobile-specific CSS.
+- Input state synchronization.
+- Controlled and uncontrolled input conflicts.
+- Form submission behavior.
+- Button event handlers.
+- Focus and keyboard interactions.
+- Validation timing.
+- Navigation and route transitions.
+- React state updates and stale state.
+- API requests and response handling.
+- Mobile browser compatibility.
+- Autofill behavior.
+- Viewport and overflow issues.
+
+Test on actual responsive breakpoints and mobile browser environments.
+
+The email-first flow must work consistently on desktop, tablet, and mobile.
+
+---
+
+# PHASE 6 — UNIFIED USER IDENTITY & ACCOUNT LINKING
+
+Google, Facebook, and Email/Password authentication must integrate with one unified NOVARA user identity system.
+
+Do not create a completely separate user account system for each provider.
+
+### Recommended data architecture
+
+Adapt the following logical structure to the existing database and ORM.
+
+**Users**
+
+- id
+- name
+- email
+- normalizedEmail
+- passwordHash, nullable where social-only accounts are permitted
+- avatarUrl
+- emailVerifiedAt
+- accountStatus
+- createdAt
+- updatedAt
+- lastLoginAt
+
+**UserAuthProviders**
+
+- id
+- userId
+- provider
+- providerUserId
+- providerEmail
+- providerEmailVerified
+- createdAt
+- updatedAt
+
+**AuthenticationSessions**, if required by the existing architecture:
+
+- id
+- userId
+- session identifier or secure token hash
+- createdAt
+- expiresAt
+- revokedAt
+- relevant device/session metadata
+
+Use appropriate foreign keys, unique constraints, indexes, and database migrations.
+
+Do not blindly create these exact tables if equivalent existing models already exist. Extend the existing architecture instead.
+
+### Account linking rules
+
+Implement secure account linking.
+
+Examples:
+
+1. A user registers with Google. A NOVARA user account is created.
+2. The same user logs in with Google again. The existing account is identified, not duplicated.
+3. A user registers with Facebook. A NOVARA user account is created.
+4. The same user logs in with Facebook again. The existing account is identified.
+5. A user registers with email/password.
+6. The same user later chooses Google or Facebook.
+
+If an email address matches an existing account, do not automatically link providers merely because the frontend supplies the same email.
+
+Require a trusted verification process and, where appropriate, an authenticated session or proof of control of the existing account.
+
+Handle:
+
+- Same provider identity used repeatedly.
+- Same email across different providers.
+- Missing provider email.
+- Unverified provider email.
+- Existing email/password account.
+- Duplicate provider identity.
+- Conflicting account ownership.
+- Account linking and unlinking.
+- Last available authentication method.
+- Disabled or suspended accounts.
+
+Never allow one provider identity to become attached to multiple NOVARA users.
+
+Use database-level uniqueness and transaction-safe operations to prevent race conditions.
+
+---
+
+# PHASE 7 — PRODUCTION-GRADE SESSION & AUTHENTICATION SECURITY
+
+Implement the session architecture that fits the existing NOVARA backend.
+
+Use secure server-managed sessions or an appropriately designed access/refresh-token architecture.
+
+Security requirements:
+
+- HttpOnly cookies where applicable.
+- Secure cookies in production.
+- Appropriate SameSite policy.
+- CSRF protection where required.
+- Safe token storage.
+- Session expiration.
+- Session revocation.
+- Logout invalidation.
+- Refresh token rotation if refresh tokens are used.
+- Token reuse detection where applicable.
+- Secure redirect allowlisting.
+- Rate limiting.
+- Login attempt protection.
+- Brute-force protection.
+- Input validation.
+- Output sanitization.
+- Security headers.
+- Safe authentication error messages.
+- Audit logging.
+
+Never store provider client secrets in frontend code.
+
+Never expose access tokens, refresh tokens, client secrets, or private credentials in browser responses or logs.
+
+Do not store plaintext passwords.
+
+Use the existing secure password hashing approach or an established password hashing algorithm appropriate to the project.
+
+Do not trust frontend authentication state as the source of truth.
+
+Every protected backend endpoint must independently verify the authenticated user and authorization permissions.
+
+---
+
+# PHASE 8 — DATABASE INTEGRATION & DATA INTEGRITY
+
+Google, Facebook, and email/password account creation must persist correctly in the actual production database architecture.
+
+Requirements:
+
+1. Create a user only when the account creation process succeeds.
+2. Prevent duplicate users.
+3. Prevent duplicate provider identities.
+4. Maintain correct provider-to-user relationships.
+5. Persist verified email information correctly.
+6. Persist profile name and avatar information where available.
+7. Update last login timestamps.
+8. Handle database failures safely.
+9. Use transactions for multi-step account creation and linking.
+10. Prevent concurrent requests from creating duplicate accounts.
+11. Maintain correct indexes and unique constraints.
+12. Ensure database migrations work with the existing deployment process.
+
+Do not use localStorage, mock arrays, static JSON, or hardcoded objects as a replacement for real account persistence.
+
+Frontend state must reflect the authenticated user returned by the backend.
+
+---
+
+# PHASE 9 — NAVIGATION BAR USER AVATAR & ACCOUNT IDENTITY
+
+After successful registration or login, the NOVARA navigation bar must display the user's actual identity.
+
+The default account/login icon should no longer remain visible for an authenticated user.
+
+### Avatar priority
+
+Use the following priority:
+
+1. Valid Google profile photo, if available.
+2. Valid Facebook profile photo, if available.
+3. User-uploaded NOVARA profile image, if available and preferred by the existing profile policy.
+4. Automatically generated initials avatar.
+
+Do not assume that every social account has a photo.
+
+### Initials avatar
+
+When there is no valid profile photo:
+
+- Generate initials from the user's name.
+- Prefer the first letters of the first and last name when available.
+- For a single-word name, use the first two characters.
+- Display the initials in the center of a circular avatar.
+- Use a clean, premium, consistent visual design.
+- Ensure the initials are readable.
+- Handle Bengali, English, Unicode, and unusual names safely.
+- Provide a stable fallback for missing names.
+
+Example:
+
+| User name | Avatar initials |
+|---|---|
+| Mahim Hasan | MH |
+| John Smith | JS |
+| Mahim | MA |
+| NOVARA User | NU |
+
+These are examples only. Generate initials dynamically from the actual user profile.
+
+### Avatar behavior
+
+- Circular shape.
+- Consistent dimensions.
+- Proper image cropping.
+- Responsive rendering.
+- Graceful fallback if the image URL fails.
+- Accessible alt text.
+- No broken image icon.
+- No layout shift.
+- Consistent display across desktop, tablet, and mobile.
+
+### Navigation bar behavior
+
+After login:
+
+- Show the real profile image or initials.
+- Show the appropriate account dropdown.
+- Display the user's name and email where the existing design supports it.
+- Keep existing navigation routes and behavior unchanged.
+- Update authentication state without requiring an unnecessary manual page refresh.
+- Maintain the correct identity after a page reload.
+- Maintain the correct identity after browser navigation.
+
+After logout:
+
+- Clear the authenticated session.
+- Restore the existing guest/account icon.
+- Prevent access to protected account routes.
+
+The same identity behavior must work for Google, Facebook, and Email/Password users.
+
+---
+
+# PHASE 10 — ADMIN PANEL: PROVIDER-WISE USER REGISTRATION ANALYTICS
+
+The Admin Panel must display actual database-backed registration statistics.
+
+This is a mandatory full-stack requirement.
+
+### Required dashboard statistics
+
+Display:
+
+- Total registered users.
+- Google-registered users.
+- Facebook-registered users.
+- Email/Password-registered users.
+- Total active users, if supported by the existing account-status model.
+- New registrations today.
+- New registrations this week.
+- New registrations this month.
+
+### Important counting rules
+
+Do not count login events as new registrations.
+
+Do not count the same user multiple times simply because the user has multiple authentication providers.
+
+Use the unified user identity and provider relationship data.
+
+Define provider attribution consistently.
+
+For example:
+
+- Google registration count = unique NOVARA users whose initial registration provider was Google.
+- Facebook registration count = unique NOVARA users whose initial registration provider was Facebook.
+- Email registration count = unique NOVARA users whose initial registration method was Email/Password.
+
+If a user later links another provider, do not silently change their original registration attribution.
+
+If the existing project already has a different established attribution model, inspect it and implement a consistent, documented model without corrupting historical data.
+
+### Admin analytics UI
+
+Use the existing Admin Panel design system.
+
+Provide:
+
+- Summary cards.
+- Provider-wise breakdown.
+- Registration trends over time.
+- Date-range filtering.
+- Search and filtering where relevant.
+- Pagination for user records.
+- Loading states.
+- Empty states.
+- Error states.
+
+Charts and summary numbers must be retrieved from real backend APIs and actual database queries.
+
+Never use fake statistics or hardcoded chart data.
+
+### Admin API requirements
+
+Implement suitable authenticated and authorized endpoints, following existing project conventions.
+
+Possible logical endpoints:
+
+- GET /api/admin/users/authentication-stats
+- GET /api/admin/users/registration-trends
+- GET /api/admin/users/provider-breakdown
+
+These are examples, not mandatory route names. Reuse existing routes where appropriate.
+
+### Admin permissions
+
+Only authorized administrators can access authentication analytics.
+
+Regular users must not be able to access admin statistics or other users' private authentication information.
+
+Enforce permissions on the backend, not just by hiding frontend menu items.
+
+---
+
+# PHASE 11 — BACKEND ARCHITECTURE & API IMPLEMENTATION
+
+Trace and implement the complete request lifecycle using the existing architecture.
+
+Where applicable, implement or extend:
+
+- Authentication routes.
+- OAuth callback routes.
+- Authentication controllers.
+- Google authentication service.
+- Facebook authentication service.
+- Unified user identity service.
+- Account linking service.
+- Session management service.
+- Authentication middleware.
+- Authorization middleware.
+- Request validation.
+- Database repositories/models.
+- Admin analytics controllers and services.
+- Error handling.
+- Logging and audit utilities.
+
+Potential logical API operations:
+
+**Public authentication operations**
+
+- Start Google OAuth.
+- Handle Google OAuth callback.
+- Start Facebook OAuth.
+- Handle Facebook OAuth callback.
+- Email-first identifier validation.
+- Email/password login.
+- Email/password registration.
+- Logout.
+- Current authenticated user.
+
+**Authenticated account operations**
+
+- Retrieve profile.
+- Update profile.
+- Link authentication provider.
+- Unlink authentication provider, subject to security rules.
+- Retrieve linked providers.
+- Revoke relevant sessions.
+
+**Admin operations**
+
+- Provider-wise registration statistics.
+- Registration trends.
+- User filtering.
+- User authentication-provider details, with appropriate privacy restrictions.
+
+All endpoints must have:
+
+- Correct HTTP methods.
+- Proper request validation.
+- Consistent response structures.
+- Appropriate status codes.
+- Authentication and authorization checks.
+- Safe error responses.
+- Rate limiting where appropriate.
+
+Do not create routes that merely return success without executing the real operation.
+
+---
+
+# PHASE 12 — ENVIRONMENT CONFIGURATION & DEPLOYMENT READINESS
+
+Create or update the project's environment-variable documentation.
+
+Use secure server-side configuration for:
+
+- Google Client ID.
+- Google Client Secret.
+- Google Redirect URI.
+- Facebook App ID.
+- Facebook App Secret.
+- Facebook Redirect URI.
+- Application base URL.
+- Session secret or token signing configuration.
+- Database connection configuration.
+- Other required security settings.
+
+Follow the project's existing environment naming conventions.
+
+Requirements:
+
+- No hardcoded production secrets.
+- No secrets committed to Git.
+- No provider secrets exposed through frontend environment variables.
+- Separate development, staging, and production configuration.
+- Validate required environment variables during application startup.
+- Fail safely when required production credentials are missing.
+- Never silently switch to mock authentication in production.
+- Document OAuth provider setup.
+- Document authorized domains and callback URLs.
+- Document deployment requirements.
+
+Do not invent credentials.
+
+If Google or Facebook developer credentials are unavailable, implement the complete integration architecture and clearly mark real provider authentication as BLOCKED until the legitimate credentials and provider configuration are supplied.
+
+---
+
+# PHASE 13 — FAILURE HANDLING & EDGE CASES
+
+Test and handle all relevant scenarios:
+
+1. Google login success.
+2. Facebook login success.
+3. User cancels Google authentication.
+4. User cancels Facebook authentication.
+5. Invalid OAuth state.
+6. Invalid authorization code.
+7. Expired or invalid identity token.
+8. Incorrect client configuration.
+9. Invalid callback URL.
+10. Missing Google profile photo.
+11. Missing Facebook email.
+12. Missing profile name.
+13. Existing user logs in again.
+14. Duplicate account creation attempt.
+15. Provider identity already linked to another account.
+16. Matching email with an existing password account.
+17. Unverified email.
+18. Database unavailable.
+19. Network timeout.
+20. Provider API unavailable.
+21. User account disabled.
+22. Session expired.
+23. User logs out.
+24. User reloads the browser.
+25. Mobile email-first login.
+26. Invalid password.
+27. Failed email validation.
+28. Avatar image fails to load.
+29. Admin analytics API fails.
+30. Unauthorized admin request.
+
+Show appropriate user-friendly error messages without exposing sensitive internal details.
+
+---
+
+# PHASE 14 — TESTING & END-TO-END VERIFICATION
+
+Do not mark the work complete merely because the application compiles.
+
+Perform actual verification using the project's available test infrastructure.
+
+### Backend tests
+
+Test:
+
+- OAuth state validation.
+- Token verification.
+- Provider identity validation.
+- User creation.
+- Existing-user lookup.
+- Duplicate prevention.
+- Account linking.
+- Session creation.
+- Session revocation.
+- Authorization checks.
+- Admin analytics queries.
+- Database transaction behavior.
+
+### Frontend tests
+
+Test:
+
+- Google button.
+- Facebook button.
+- Email-first flow.
+- Password step.
+- Registration form.
+- Error messages.
+- Loading states.
+- Navigation bar avatar.
+- Account dropdown.
+- Logout behavior.
+- Mobile responsiveness.
+
+### End-to-end tests
+
+Where real provider credentials and test accounts are available:
+
+1. Register a new account using Google.
+2. Verify the callback.
+3. Verify the backend identity validation.
+4. Verify the user record in the database.
+5. Verify provider relationship persistence.
+6. Verify the session.
+7. Verify the navigation bar avatar.
+8. Reload the page.
+9. Verify the same account remains authenticated.
+10. Logout.
+11. Login again using Google.
+12. Confirm no duplicate account was created.
+13. Repeat the equivalent flow for Facebook.
+14. Verify the Admin Panel registration statistics.
+
+Use provider-approved test accounts and sandbox/development configuration where available.
+
+Do not claim that real Google or Facebook login has been successfully tested unless the actual provider authentication flow was completed.
+
+### Responsive verification
+
+Test:
+
+- Desktop.
+- Laptop.
+- Tablet.
+- Mobile portrait.
+- Mobile landscape.
+- Common narrow mobile widths.
+
+Pay special attention to the email-first flow and the transition from email entry to password entry.
+
+### Regression verification
+
+Ensure these existing NOVARA features remain functional:
+
+- Normal registration.
+- Normal login.
+- Logout.
+- User profile.
+- Navigation bar.
+- Product browsing.
+- Product details.
+- Cart.
+- Checkout.
+- Orders.
+- Wishlist.
+- Payment system.
+- Admin Panel.
+- Existing protected routes.
+
+Do not introduce unrelated changes.
+
+---
+
+# PHASE 15 — ROOT CAUSE ANALYSIS & SAFE FIXING PROCESS
+
+For every identified issue, follow this exact process:
+
+1. Reproduce the problem.
+2. Identify the affected component or endpoint.
+3. Trace the complete frontend-to-backend request.
+4. Inspect API responses and server logs.
+5. Inspect database behavior.
+6. Identify the actual root cause.
+7. Determine the smallest safe fix.
+8. Implement the fix in the correct architectural layer.
+9. Run the relevant test.
+10. Run regression tests for affected functionality.
+
+Do not apply superficial UI workarounds to backend problems.
+
+Do not hide errors.
+
+Do not introduce mock data to make a feature appear functional.
+
+Do not remove existing functionality to make tests pass.
+
+Do not rewrite the entire authentication architecture if the existing architecture can be safely extended.
+
+---
+
+# NON-NEGOTIABLE RULES
+
+1. Complete codebase inspection before implementation.
+2. Real Google OAuth integration, not a frontend simulation.
+3. Real Facebook OAuth integration, not a frontend simulation.
+4. Real backend routes, controllers, services, and middleware.
+5. Real database persistence.
+6. Secure unified user identity.
+7. Secure account linking.
+8. Real session management.
+9. Actual navigation bar avatar integration.
+10. Real Admin Panel registration analytics.
+11. Desktop and mobile authentication must work.
+12. Preserve all unrelated existing functionality.
+13. No fake success responses.
+14. No hardcoded analytics.
+15. No exposed provider secrets.
+16. No plaintext passwords.
+17. No unsafe automatic account linking.
+18. No fabricated provider credentials.
+19. No claiming untested features are production-ready.
+20. All changes must be compatible with the existing project architecture.
+
+**The task is not complete until frontend, backend, database, provider integration, session management, navigation identity, and Admin Panel analytics have been integrated and verified.**
+
+---
+
+# FINAL PRODUCTION READINESS REPORT
+
+After implementation, provide a detailed report containing:
+
+### A. Architecture inspection
+
+- Existing authentication architecture.
+- Problems discovered.
+- Root causes.
+- Modules reused.
+- Modules created or modified.
+
+### B. Implementation report
+
+- Frontend changes.
+- Backend changes.
+- OAuth routes.
+- Controllers.
+- Services.
+- Middleware.
+- Database changes.
+- Migrations.
+- Session architecture.
+- Admin Panel changes.
+- Avatar integration.
+
+### C. Provider integration status
+
+Report Google and Facebook separately.
+
+For each provider, report:
+
+- Configuration status.
+- OAuth initiation status.
+- Callback status.
+- Token/identity verification status.
+- User persistence status.
+- Session status.
+- Real provider test status.
+
+### D. Testing report
+
+List the tests executed, their results, and any outstanding failures.
+
+### E. Production readiness checklist
+
+Use only these statuses:
+
+- PASS
+- FAIL
+- BLOCKED
+- NOT TESTED
+- NOT APPLICABLE
+
+| Requirement | Status |
+|---|---|
+| Google OAuth backend integration | |
+| Facebook OAuth backend integration | |
+| Secure callback validation | |
+| Database user creation | |
+| Duplicate account prevention | |
+| Secure account linking | |
+| Session management | |
+| Email/password authentication | |
+| Mobile email-first flow | |
+| Profile photo and initials avatar | |
+| Navigation bar identity | |
+| Admin provider-wise statistics | |
+| Admin authorization | |
+| Desktop responsive verification | |
+| Mobile responsive verification | |
+| Regression tests | |
+| Production environment configuration | |
+
+### F. Outstanding requirements
+
+Clearly identify anything requiring:
+
+- Google developer credentials.
+- Facebook developer credentials.
+- Authorized domain configuration.
+- Provider app verification or review.
+- Production deployment configuration.
+- Additional manual configuration.
+- Real-device testing.
+
+### FINAL ACCEPTANCE CRITERIA
+
+The implementation can be declared production-ready only when:
+
+1. Google authentication works through Google's real OAuth flow.
+2. Facebook authentication works through Meta's real OAuth flow.
+3. Both providers are verified by the backend.
+4. User accounts are persisted correctly in the actual database.
+5. Duplicate account creation is prevented.
+6. Secure sessions work across page reloads.
+7. The navigation bar displays the correct user photo or initials.
+8. Email/password registration and login continue working.
+9. The email-first flow works on desktop and mobile.
+10. Admin statistics show actual unique registered users by original registration provider.
+11. Backend authorization prevents unauthorized admin access.
+12. Critical security and regression tests pass.
+13. Required production credentials and provider configurations are verified.
+
+If any requirement is blocked by missing credentials, provider approval, or deployment access, report it honestly.
+
+**Never label a feature PASS without evidence. Never label the whole system production-ready while a critical requirement remains FAIL, BLOCKED, or NOT TESTED.**
+
+Now begin with the complete project inspection. Understand the existing architecture, identify the root causes, create a safe implementation plan, and then execute the full-stack implementation without disturbing unrelated NOVARA functionality.

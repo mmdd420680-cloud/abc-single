@@ -1,0 +1,1474 @@
+# NOVARA — FINAL MASTER PROMPT
+# COMPLETE PROJECT-WIDE RESPONSIVE ENGINEERING, ROOT CAUSE ANALYSIS, FULL SYSTEM AUDIT & END-TO-END PRODUCTION READINESS VERIFICATION
+
+## 1. ROLE & RESPONSIBILITY
+
+Act as a Principal Software Architect, Senior Full-Stack Engineer, Responsive UI/UX Architect, Frontend Performance Engineer, Backend Engineer, Database Engineer, Application Security Engineer, QA Automation Engineer, and Production Readiness Auditor.
+
+Your responsibility is to perform the final comprehensive engineering audit of the existing NOVARA e-commerce application.
+
+The objective is to make the entire existing project professionally production-ready, fully responsive across all major device sizes, reliable, stable, maintainable, and visually polished.
+
+This task has two major responsibilities:
+
+**A. Complete Responsive Engineering**
+
+Make the entire NOVARA application responsive across mobile phones, tablets, laptops, desktops, and large displays.
+
+**B. Complete Project-Wide Root Cause Audit and Final Verification**
+
+Inspect the entire project, identify existing problems, understand their actual root causes, implement safe fixes, and verify that all important business functionality works correctly.
+
+This is a client-facing project.
+
+Do not treat this as a simple UI adjustment task.
+
+---
+
+# PHASE 1 — COMPLETE PROJECT-WIDE ARCHITECTURE INSPECTION
+
+Before changing anything, thoroughly inspect the existing NOVARA project.
+
+Do not immediately start modifying components.
+
+Understand the complete application architecture and how its modules depend on one another.
+
+### 1.1 Frontend inspection
+
+Inspect:
+
+- Application entry points.
+- React application structure.
+- TypeScript types.
+- All pages.
+- All layouts.
+- All shared components.
+- All responsive components.
+- Navigation and routing.
+- Header.
+- Footer.
+- Product grids.
+- Product cards.
+- Product details.
+- Cart.
+- Wishlist.
+- Checkout.
+- Authentication pages.
+- User profile.
+- Order history.
+- Search.
+- Filters.
+- Sorting.
+- Infinite scrolling.
+- Loading states.
+- Modals.
+- Drawers.
+- Dropdowns.
+- Forms.
+- Tables.
+- Charts.
+- Notifications.
+- Error boundaries.
+- Existing animation systems.
+- Global styles.
+- Tailwind or other styling configuration.
+
+### 1.2 Admin Panel inspection
+
+Inspect every Admin Panel module, including:
+
+- Admin Dashboard.
+- Analytics.
+- Products.
+- Product creation.
+- Product editing.
+- Product details.
+- Product variants.
+- Product attributes.
+- Categories.
+- Brands.
+- Inventory.
+- Orders.
+- Order details.
+- Customers.
+- Customer details.
+- Reviews.
+- Coupons and discounts.
+- Payments.
+- Transactions.
+- Refunds, if supported.
+- Banners.
+- Hero sliders.
+- Navigation management.
+- Advertisements.
+- Website settings.
+- Admin profile.
+- Admin authentication.
+- Roles and permissions.
+
+Inspect every page and every important interaction.
+
+### 1.3 Backend inspection
+
+Inspect:
+
+- Express application.
+- API routes.
+- Controllers.
+- Services.
+- Middleware.
+- Authentication.
+- Authorization.
+- Request validation.
+- Database models.
+- Error handling.
+- Business logic.
+- File upload handling.
+- Payment integration.
+- Order processing.
+- Cart processing.
+- Product processing.
+- Inventory operations.
+- Logging.
+
+### 1.4 Database inspection
+
+Inspect:
+
+- Existing schemas.
+- Relationships.
+- Indexes.
+- Constraints.
+- Required fields.
+- Optional fields.
+- Data consistency.
+- Query patterns.
+- Existing migrations.
+- Referential integrity.
+
+### 1.5 Architecture dependency mapping
+
+Understand which components depend on which modules.
+
+Before changing an existing component, identify:
+
+- Its parent components.
+- Its child components.
+- Its API dependencies.
+- Its state dependencies.
+- Its shared styles.
+- Its routes.
+- Its business logic dependencies.
+
+Do not modify an isolated component without understanding its impact on the rest of the project.
+
+---
+
+# PHASE 2 — COMPLETE ALL-DEVICE RESPONSIVE ENGINEERING
+
+## 2.1 Global requirement
+
+Every relevant page and component throughout NOVARA must work professionally across all major device sizes.
+
+Responsive engineering must cover the entire application, including:
+
+- Customer storefront.
+- Admin Panel.
+- Authentication.
+- User account.
+- Product pages.
+- Cart.
+- Checkout.
+- Order pages.
+- All forms.
+- All tables.
+- All dashboards.
+- All modals.
+- All dropdowns.
+- All navigation systems.
+
+Do not make only the Home Page responsive.
+
+Do not fix only the customer-facing frontend while ignoring the Admin Panel.
+
+The entire application must be audited.
+
+## 2.2 Device and viewport testing matrix
+
+Test the application using realistic viewport sizes.
+
+| Device category | Viewport width |
+|---|---:|
+| Small mobile | 320px |
+| Standard mobile | 360px |
+| Mobile | 375px |
+| Mobile | 390px |
+| Large mobile | 430px |
+| Small tablet | 600px |
+| Tablet | 768px |
+| Large tablet | 820px |
+| Small laptop | 1024px |
+| Laptop | 1280px |
+| Desktop | 1366px |
+| Large desktop | 1440px |
+| Wide desktop | 1600px |
+| Extra-wide desktop | 1920px |
+
+Also test different viewport heights and browser zoom levels where practical.
+
+Do not assume that a page is responsive simply because it looks correct at 375px and 1440px.
+
+Check intermediate widths where layout transitions often break.
+
+## 2.3 Responsive design system
+
+Inspect the existing design system before changing styles.
+
+Reuse existing:
+
+- Color palette.
+- Typography.
+- Font sizes.
+- Spacing system.
+- Border radius.
+- Shadows.
+- Component variants.
+- Design tokens.
+- Responsive breakpoints.
+
+Use consistent responsive layout rules.
+
+Prefer:
+
+- CSS Grid.
+- Flexbox.
+- Fluid sizing.
+- `minmax()`.
+- `clamp()`.
+- Responsive spacing.
+- Appropriate container widths.
+- Mobile-first layout rules where suitable.
+
+Avoid:
+
+- Excessive fixed widths.
+- Hardcoded positioning.
+- Unnecessary absolute positioning.
+- Fixed heights that clip content.
+- Overlapping elements.
+- Fragile viewport calculations.
+- Inconsistent breakpoints.
+- Duplicated media queries.
+
+Do not introduce a new design system unnecessarily.
+
+## 2.4 Mobile experience
+
+On mobile devices:
+
+- Navigation must remain usable.
+- Buttons must be easy to tap.
+- Text must remain readable.
+- Product cards must fit the viewport.
+- Product images must preserve their aspect ratios.
+- Forms must remain accessible.
+- Dropdowns must not overflow the viewport.
+- Modals must fit the available screen.
+- Tables must have a deliberate mobile presentation.
+- Checkout must remain easy to complete.
+- Admin actions must remain accessible.
+- Important content must not be hidden behind fixed elements.
+
+Use touch-friendly interaction targets.
+
+Avoid tiny buttons and closely packed controls.
+
+Do not make the mobile experience a scaled-down desktop layout.
+
+Use appropriate mobile-specific layout arrangements while preserving the same underlying functionality.
+
+## 2.5 Tablet experience
+
+Verify:
+
+- Navigation transitions.
+- Sidebar behavior.
+- Product grid columns.
+- Dashboard cards.
+- Form layouts.
+- Table widths.
+- Modal dimensions.
+- Chart dimensions.
+- Content spacing.
+
+Prevent awkward intermediate layouts between mobile and desktop.
+
+## 2.6 Desktop experience
+
+Preserve the existing premium desktop appearance.
+
+Verify:
+
+- Appropriate content width.
+- Consistent alignment.
+- Product grid balance.
+- Admin sidebar.
+- Dashboard layout.
+- Tables.
+- Charts.
+- Header.
+- Footer.
+- Spacing.
+- Typography.
+
+Do not stretch content unnecessarily across large displays.
+
+Use suitable maximum content widths.
+
+## 2.7 Header and navigation responsiveness
+
+Audit every navigation component.
+
+Verify:
+
+- Logo positioning.
+- Navigation links.
+- Dropdown menus.
+- Mega menus.
+- Search field.
+- Account icon.
+- Wishlist icon.
+- Cart icon.
+- Cart counter.
+- Mobile navigation.
+- Mobile menu drawer.
+- Sticky header behavior.
+
+Ensure:
+
+- No navigation item overlaps another.
+- Dropdowns remain within the viewport.
+- Menus open and close correctly.
+- Mobile menus are touch-friendly.
+- Body scrolling is handled correctly when drawers are open.
+- Keyboard navigation remains possible.
+- Existing navigation URLs remain unchanged.
+
+## 2.8 Product grid and product card responsiveness
+
+Inspect every product card and product listing layout.
+
+Verify:
+
+- Responsive columns.
+- Image dimensions.
+- Image cropping.
+- Product titles.
+- Pricing.
+- Discount badges.
+- Ratings.
+- Stock labels.
+- Action buttons.
+- Wishlist icons.
+- Add to Cart buttons.
+
+Prevent:
+
+- Unequal card heights where consistency is expected.
+- Text overflow.
+- Image distortion.
+- Overlapping buttons.
+- Unnecessary whitespace.
+- Horizontal page overflow.
+
+Preserve existing product card functionality and visual identity.
+
+## 2.9 Product details responsiveness
+
+Verify:
+
+- Product gallery.
+- Main image.
+- Thumbnail navigation.
+- Product title.
+- Price.
+- Discount.
+- Variant selectors.
+- Dynamic attributes.
+- Quantity selector.
+- Add to Cart.
+- Wishlist.
+- Description.
+- Specifications.
+- Reviews.
+- Related products.
+
+The layout must adapt correctly across mobile, tablet, and desktop.
+
+Do not break product variant selection or purchase functionality while adjusting the layout.
+
+## 2.10 Admin Panel responsiveness
+
+This is a critical requirement.
+
+The complete Admin Panel must be responsive.
+
+### Admin sidebar
+
+- Desktop: Preserve the existing sidebar design.
+- Tablet: Use an appropriate collapsible or compact layout.
+- Mobile: Use a professional navigation drawer or suitable mobile navigation.
+
+Ensure that:
+
+- Sidebar content is scrollable when necessary.
+- Navigation items remain accessible.
+- Active route indicators work.
+- Menu buttons work.
+- The drawer closes appropriately.
+- The main content area adjusts correctly.
+
+### Admin Dashboard
+
+Verify:
+
+- Analytics cards.
+- Revenue metrics.
+- Order statistics.
+- Customer statistics.
+- Product statistics.
+- Charts.
+- Recent orders.
+- Recent activities.
+
+Charts must resize correctly without clipping labels or overflowing.
+
+### Admin data tables
+
+Inspect every table.
+
+For narrow screens, use a deliberate strategy:
+
+- Responsive column visibility.
+- Horizontal scrolling within the table container when necessary.
+- Card-based presentation where suitable.
+- Accessible row details.
+- Appropriate action menus.
+
+Never allow a wide table to create uncontrolled horizontal scrolling across the entire page.
+
+Do not hide important actions or information without providing an accessible alternative.
+
+### Admin forms
+
+Verify:
+
+- Product creation forms.
+- Product editing forms.
+- Category forms.
+- Brand forms.
+- Variant forms.
+- Attribute forms.
+- Banner forms.
+- Navigation forms.
+- Order forms.
+- Settings forms.
+
+Inputs, selects, textareas, image uploads, buttons, and validation messages must fit the viewport.
+
+### Admin modals and drawers
+
+Verify:
+
+- Maximum width.
+- Maximum height.
+- Internal scrolling.
+- Mobile placement.
+- Keyboard accessibility.
+- Close actions.
+- Focus behavior.
+
+A modal must never become impossible to close because its content exceeds the viewport.
+
+---
+
+# PHASE 3 — SCROLLBAR, OVERFLOW & SCROLL BEHAVIOR AUDIT
+
+Audit scrolling across the entire project.
+
+The goal is to eliminate unnecessary scrollbars and broken scrolling without removing legitimate scrolling.
+
+## 3.1 Horizontal overflow
+
+Inspect all pages for:
+
+- Unnecessary horizontal page scrolling.
+- Fixed-width components.
+- Oversized images.
+- Long product titles.
+- Wide tables.
+- Charts.
+- Navigation overflow.
+- Modal overflow.
+- Dropdown overflow.
+- Long URLs.
+- Unbreakable text.
+- Incorrect grid sizing.
+
+Use appropriate layout constraints such as:
+
+- `min-width: 0`.
+- `max-width: 100%`.
+- `overflow-wrap`.
+- Responsive image sizing.
+- Proper grid constraints.
+
+Fix the actual root cause rather than hiding the symptom.
+
+Do not globally apply `overflow-x: hidden` as a shortcut.
+
+Do not clip important content.
+
+## 3.2 Vertical scrolling
+
+Verify:
+
+- Body scrolling.
+- Page scrolling.
+- Sidebar scrolling.
+- Drawer scrolling.
+- Modal scrolling.
+- Dropdown scrolling.
+- Product listing scrolling.
+- Footer accessibility.
+
+Prevent:
+
+- Double-scrollbar problems.
+- Unexpected scroll locking.
+- Scrollbar disappearance.
+- Stuck body scrolling.
+- Unnecessary nested scrolling.
+- Content hidden behind fixed headers.
+- Content hidden behind fixed bottom navigation.
+
+Use independent scrolling only where it improves the user experience.
+
+## 3.3 Scrollbar styling
+
+Inspect the existing scrollbar design.
+
+If the project uses custom scrollbar styling:
+
+- Preserve the existing visual identity.
+- Keep the scrollbar usable.
+- Maintain adequate contrast.
+- Avoid excessively narrow scrollbars.
+- Ensure cross-browser compatibility.
+
+Never remove native scrollbar functionality.
+
+Do not hide scrollbars when users need them to navigate.
+
+Respect operating-system and browser scrollbar behavior.
+
+## 3.4 Infinite product scrolling compatibility
+
+Verify the existing infinite product loading implementation.
+
+Ensure:
+
+- Initial batch loads correctly.
+- Subsequent batches load correctly.
+- Loading does not trigger duplicate requests.
+- Footer remains reachable.
+- Rapid scrollbar dragging does not cause endless API calls.
+- Product loading does not cause layout jumps.
+- Mobile scrolling works.
+- Existing search, filters, and sorting continue to work.
+
+Do not modify its business rules unless an actual defect is identified.
+
+---
+
+# PHASE 4 — COMPLETE ROOT CAUSE ANALYSIS
+
+Do not fix problems based only on their visual symptoms.
+
+Every discovered issue must be investigated.
+
+Use this workflow:
+
+1. Reproduce the issue.
+2. Identify the affected page or module.
+3. Inspect browser console errors.
+4. Inspect network requests.
+5. Inspect API responses.
+6. Trace the frontend component.
+7. Trace state management.
+8. Trace backend routes and controllers where applicable.
+9. Inspect service logic.
+10. Inspect database queries and records where applicable.
+11. Identify the actual root cause.
+12. Evaluate possible side effects.
+13. Implement the smallest safe fix.
+14. Test the affected module.
+15. Run relevant regression tests.
+
+### Root cause report format
+
+For each significant issue, document:
+
+- Issue description.
+- Reproduction steps.
+- Affected device or viewport.
+- Affected page.
+- Root cause.
+- Relevant files.
+- Proposed correction.
+- Side-effect risks.
+- Test evidence.
+- Final status.
+
+Do not apply random CSS overrides to hide structural problems.
+
+Do not add duplicate functions to work around existing defects.
+
+Do not change an API response merely to fix one frontend component unless the API itself is incorrect.
+
+---
+
+# PHASE 5 — COMPLETE E-COMMERCE BUSINESS FUNCTIONALITY VERIFICATION
+
+Perform an end-to-end functional audit of the entire NOVARA storefront.
+
+## 5.1 Authentication
+
+Verify:
+
+- Registration.
+- Login.
+- Logout.
+- Google authentication.
+- Facebook authentication.
+- Email validation.
+- Password validation.
+- User session persistence.
+- Authentication restoration.
+- Profile display.
+- Protected routes.
+- Unauthorized access handling.
+
+Verify real backend authentication, not just frontend UI behavior.
+
+## 5.2 Product management
+
+Verify:
+
+- Create product.
+- Read product.
+- Update product.
+- Delete or archive product.
+- Product image upload.
+- Product image display.
+- Product status.
+- Product pricing.
+- Discount.
+- Stock.
+- Product variants.
+- Product attributes.
+- Category assignment.
+- Brand assignment.
+- Product search.
+- Product filtering.
+- Product sorting.
+- Product pagination or infinite scrolling.
+
+Check whether Admin-created data correctly appears on the public storefront.
+
+## 5.3 Dynamic product attributes and variants
+
+Verify:
+
+- Attribute creation.
+- Attribute editing.
+- Attribute deletion.
+- Variant creation.
+- Variant editing.
+- Variant availability.
+- Variant pricing.
+- Variant stock.
+- Product-specific attributes.
+- Dynamic Product Details rendering.
+
+Ensure that changing a variant does not display incorrect stock, pricing, or product information.
+
+## 5.4 Category and brand management
+
+Verify:
+
+- Create.
+- Read.
+- Update.
+- Delete.
+- Enable.
+- Disable.
+- Product relationships.
+- Frontend display.
+- Navigation integration.
+- Filtering.
+
+Check for orphaned references and broken relationships.
+
+## 5.5 Cart
+
+Verify:
+
+- Add to Cart.
+- Repeated Add to Cart.
+- Quantity changes.
+- Product removal.
+- Variant-specific cart lines.
+- Cart persistence.
+- Guest cart behavior, if supported.
+- Authenticated cart behavior.
+- Navbar counter.
+- Subtotal.
+- Grand total.
+
+Preserve the established business rule:
+
+- Navbar Cart Counter represents unique cart lines.
+- It does not represent the sum of quantities.
+- Repeated Add to Cart clicks must not unintentionally increase quantity.
+- Product Details quantity selection must calculate totals correctly.
+
+## 5.6 Wishlist
+
+Verify:
+
+- Add to Wishlist.
+- Remove from Wishlist.
+- Wishlist persistence.
+- User ownership.
+- Navbar or account indicators.
+- Product card state synchronization.
+- Duplicate prevention.
+
+## 5.7 Checkout and address
+
+Verify:
+
+- Customer information.
+- Delivery address.
+- Address validation.
+- Bangladesh location selection.
+- Division.
+- District.
+- Upazila or Thana.
+- Union or urban area where supported.
+- Delivery instructions.
+- Order summary.
+- Shipping charges.
+- Coupon handling.
+- Final payable amount.
+
+Verify that location selections persist correctly and that frontend and backend agree on the selected address.
+
+## 5.8 Payment system
+
+Verify the existing supported payment integrations.
+
+Check:
+
+- Payment method selection.
+- Payment initiation.
+- Backend gateway communication.
+- Payment verification.
+- Callback or webhook handling.
+- Transaction references.
+- Payment status.
+- Duplicate payment prevention.
+- Failed payment handling.
+- Order-payment synchronization.
+- Refund handling where supported.
+
+Never trust frontend redirects as proof of payment.
+
+Never mark an order paid without authoritative provider verification.
+
+Do not perform unauthorized live-money transactions during testing.
+
+## 5.9 Order management
+
+Verify:
+
+- Order creation.
+- Order details.
+- Order history.
+- Order status.
+- Payment status.
+- Admin order listing.
+- Admin order details.
+- Order search.
+- Order filtering.
+- Order pagination.
+- Order cancellation.
+- Inventory synchronization.
+- Refund status where supported.
+
+Verify that the Admin Panel and customer account show consistent order information.
+
+## 5.10 Banner, hero slider and navigation management
+
+Verify:
+
+- Create banner.
+- Update banner.
+- Delete banner.
+- Enable or disable.
+- Image upload.
+- Link configuration.
+- Display order.
+- Scheduling where supported.
+- Responsive display.
+- Admin-to-frontend synchronization.
+
+Verify that all Admin-managed navigation menus, dropdowns, and advertisements display correctly.
+
+## 5.11 Reviews and customer management
+
+Verify:
+
+- Review creation.
+- Review editing or moderation.
+- Review deletion.
+- Rating calculations.
+- Customer listing.
+- Customer details.
+- Search.
+- Filters.
+- Permissions.
+- Pagination.
+
+## 5.12 Analytics and reporting
+
+Verify:
+
+- Revenue.
+- Orders.
+- Customers.
+- Products.
+- Sales metrics.
+- Charts.
+- Date filters.
+- Dashboard summaries.
+
+Check that the displayed values come from real backend data and use consistent business definitions.
+
+---
+
+# PHASE 6 — BACKEND, DATABASE & API INTEGRITY AUDIT
+
+Inspect the complete backend and verify the actual end-to-end behavior.
+
+### API verification
+
+Check:
+
+- Correct HTTP methods.
+- Correct status codes.
+- Request validation.
+- Authentication.
+- Authorization.
+- Error responses.
+- Pagination.
+- Filtering.
+- Sorting.
+- Data consistency.
+- Duplicate request handling.
+- Rate limiting where appropriate.
+
+### Database verification
+
+Check:
+
+- Schema consistency.
+- Required fields.
+- Relationships.
+- Unique constraints.
+- Indexes.
+- Duplicate records.
+- Invalid records.
+- Referential integrity.
+- Transaction handling.
+- Concurrency risks.
+
+### Critical business integrity
+
+Verify that:
+
+- Frontend data matches backend data.
+- Backend data matches database records.
+- Admin updates appear correctly in the storefront.
+- Orders remain consistent across customer and admin views.
+- Product prices are calculated server-side.
+- Stock updates are reliable.
+- Payment status is verified.
+- Unauthorized users cannot access other users' data.
+
+Do not modify database schemas or business logic unnecessarily.
+
+Only change them if an actual defect requires a correction.
+
+Use safe, backward-compatible migrations when necessary.
+
+Never reset production data.
+
+---
+
+# PHASE 7 — SECURITY AND RELIABILITY VERIFICATION
+
+Perform a security review of the existing implementation.
+
+Inspect relevant risks involving:
+
+- Broken access control.
+- Authentication bypass.
+- IDOR.
+- SQL or NoSQL injection.
+- XSS.
+- CSRF.
+- Mass assignment.
+- Unsafe file uploads.
+- Sensitive information exposure.
+- Insecure session management.
+- Weak rate limiting.
+- Open redirects.
+- Exposed secrets.
+- Unauthorized Admin API access.
+
+Verify:
+
+- Password hashing.
+- Server-side authorization.
+- Secure cookie configuration where applicable.
+- Token handling.
+- Input validation.
+- Safe database queries.
+- CORS configuration.
+- Security headers.
+- Error handling.
+- Audit logging.
+
+Do not claim that the system is completely unhackable.
+
+Use defense-in-depth and report residual risks honestly.
+
+---
+
+# PHASE 8 — PERFORMANCE & PRODUCTION STABILITY
+
+Audit performance across all supported device sizes.
+
+### Frontend performance
+
+Inspect:
+
+- JavaScript bundle size.
+- Unnecessary re-renders.
+- Expensive components.
+- Image optimization.
+- Lazy loading.
+- Font loading.
+- Animation performance.
+- Layout shifts.
+- Memory usage.
+- Event listener cleanup.
+- API request duplication.
+
+### Backend performance
+
+Inspect:
+
+- Slow endpoints.
+- Expensive queries.
+- N+1 queries.
+- Database indexes.
+- Connection management.
+- Pagination.
+- Caching where appropriate.
+- API response sizes.
+- Error rates.
+
+### Large catalog support
+
+Verify that large product catalogs are handled through efficient backend pagination.
+
+Do not fetch the entire database into the browser.
+
+Use realistic test data where possible.
+
+Report actual measured performance rather than invented benchmarks.
+
+### Production build
+
+Run the available:
+
+- TypeScript checks.
+- Lint checks.
+- Unit tests.
+- Integration tests.
+- Production build.
+- End-to-end tests.
+
+Fix genuine errors without hiding them through disabling checks or weakening TypeScript settings.
+
+---
+
+# PHASE 9 — ACCESSIBILITY & PROFESSIONAL UX VERIFICATION
+
+Ensure the application remains usable for different users and input methods.
+
+Check:
+
+- Keyboard navigation.
+- Focus visibility.
+- Accessible labels.
+- Button semantics.
+- Form labels.
+- Validation messages.
+- Color contrast.
+- Image alternative text.
+- Modal focus management.
+- Dropdown keyboard behavior.
+- Touch targets.
+- Reduced-motion preferences.
+
+Do not sacrifice accessibility to achieve a visual effect.
+
+Ensure mobile interactions remain easy to use.
+
+---
+
+# PHASE 10 — STRICT PROJECT PRESERVATION
+
+This requirement is mandatory.
+
+The existing NOVARA application must be preserved.
+
+Do not unnecessarily change:
+
+- Existing business logic.
+- Schema validation.
+- Functions.
+- Components.
+- API contracts.
+- Routes.
+- URLs.
+- Database relationships.
+- Authentication.
+- Payment integration.
+- Cart logic.
+- Order logic.
+- Product logic.
+- Admin permissions.
+- Existing designs.
+- Existing animations.
+- Existing color palette.
+- Existing typography.
+
+Do not redesign the complete application.
+
+Do not replace working modules.
+
+Do not introduce unnecessary dependencies.
+
+Do not create duplicate APIs, utilities, hooks, or state management systems.
+
+Do not remove existing features.
+
+Do not use global CSS overrides that unexpectedly affect unrelated pages.
+
+Do not hide errors or disable tests to make the project appear successful.
+
+### Safe modification procedure
+
+Before modifying a file:
+
+1. Read the complete relevant implementation.
+2. Identify its dependencies.
+3. Understand its current behavior.
+4. Determine the smallest necessary change.
+5. Check possible side effects.
+6. Implement the fix.
+7. Test the changed functionality.
+8. Run regression tests on affected modules.
+
+Preserve backward compatibility wherever practical.
+
+If a problem cannot be safely fixed without changing an unrelated system, document the issue and explain the dependency before making that change.
+
+---
+
+# PHASE 11 — FINAL DEVICE-BY-DEVICE TESTING
+
+Do not rely only on desktop browser testing.
+
+Test the actual application at the viewport sizes defined in Phase 2.
+
+For every important page, verify:
+
+- Layout.
+- Spacing.
+- Typography.
+- Images.
+- Buttons.
+- Forms.
+- Tables.
+- Navigation.
+- Scroll behavior.
+- Modals.
+- Dropdowns.
+- Responsiveness.
+- Functionality.
+
+### Required page coverage
+
+**Customer storefront**
+
+- Home.
+- Product listing.
+- Category.
+- Search results.
+- Product details.
+- Cart.
+- Wishlist.
+- Checkout.
+- Order success.
+- Login.
+- Registration.
+- Account.
+- Profile.
+- Order history.
+
+**Admin Panel**
+
+- Dashboard.
+- Products.
+- Product create/edit.
+- Categories.
+- Brands.
+- Attributes.
+- Variants.
+- Inventory.
+- Orders.
+- Order details.
+- Customers.
+- Reviews.
+- Payments.
+- Transactions.
+- Banners.
+- Navigation.
+- Analytics.
+- Settings.
+
+Every page must be checked at mobile, tablet, and desktop sizes.
+
+Prioritize high-risk and high-traffic pages, but do not declare full responsiveness without inspecting the remaining pages.
+
+---
+
+# PHASE 12 — FINAL REGRESSION AND END-TO-END VERIFICATION
+
+Perform end-to-end testing of important real-world workflows.
+
+### Workflow A: Customer purchase
+
+1. Open the storefront.
+2. Browse products.
+3. Search for a product.
+4. Apply filters.
+5. Open product details.
+6. Select a variant.
+7. Select quantity.
+8. Add to Cart.
+9. Verify cart count.
+10. Open Cart.
+11. Update quantity.
+12. Proceed to Checkout.
+13. Select delivery address.
+14. Select supported payment method.
+15. Complete the appropriate test payment flow.
+16. Verify order creation.
+17. Verify order details.
+18. Verify customer order history.
+19. Verify Admin Panel order visibility.
+
+### Workflow B: Admin product management
+
+1. Login as an authorized admin.
+2. Create a product.
+3. Add images.
+4. Configure pricing.
+5. Configure stock.
+6. Configure variants.
+7. Configure attributes.
+8. Assign category.
+9. Assign brand.
+10. Publish the product.
+11. Verify storefront display.
+12. Edit the product.
+13. Verify updated storefront data.
+14. Disable or archive the product.
+15. Verify correct public availability.
+
+### Workflow C: Order management
+
+1. Create a test order.
+2. Verify the Admin Panel.
+3. Open order details.
+4. Update a permitted order state.
+5. Verify customer-side status.
+6. Verify inventory consistency.
+7. Test cancellation under valid conditions.
+8. Verify related payment and inventory behavior.
+
+### Workflow D: Responsive verification
+
+Repeat critical workflows on:
+
+- Small mobile.
+- Standard mobile.
+- Tablet.
+- Laptop.
+- Desktop.
+
+Verify that responsive changes have not broken functionality.
+
+Use test accounts and sandbox services where applicable.
+
+Never use real customer data for uncontrolled testing.
+
+---
+
+# PHASE 13 — FINAL ROOT CAUSE FIX REPORT
+
+For every issue discovered, document:
+
+| Field | Required information |
+|---|---|
+| Issue | What is broken |
+| Root cause | Why it happens |
+| Affected module | Where it occurs |
+| Affected devices | Which viewports are affected |
+| Files changed | Exact modified files |
+| Fix | What was corrected |
+| Regression risk | Possible side effects |
+| Verification | How it was tested |
+| Status | Final result |
+
+Prioritize:
+
+- Critical production defects.
+- Security vulnerabilities.
+- Data integrity problems.
+- Payment and order failures.
+- Broken authentication.
+- Mobile usability problems.
+- Layout overflow.
+- Performance bottlenecks.
+- Minor visual inconsistencies.
+
+Do not spend time polishing a small visual issue while a critical order or payment defect remains unresolved.
+
+---
+
+# PHASE 14 — FINAL PRODUCTION READINESS REPORT
+
+At the end, provide a clear report.
+
+### A. Architecture audit
+
+- Complete project inspected.
+- Main dependencies understood.
+- Critical modules inspected.
+- Issues discovered.
+- Root causes identified.
+
+### B. Responsive engineering
+
+- Customer storefront.
+- Admin Panel.
+- Mobile.
+- Tablet.
+- Laptop.
+- Desktop.
+- Horizontal overflow.
+- Vertical scrolling.
+- Tables.
+- Modals.
+- Forms.
+- Navigation.
+- Charts.
+- Product grids.
+
+### C. Functional verification
+
+- Authentication.
+- Product CRUD.
+- Variants.
+- Attributes.
+- Categories.
+- Brands.
+- Cart.
+- Wishlist.
+- Checkout.
+- Payments.
+- Orders.
+- Inventory.
+- Banners.
+- Navigation.
+- Reviews.
+- Analytics.
+
+### D. Technical verification
+
+- Frontend.
+- Backend.
+- APIs.
+- Database.
+- Security.
+- Performance.
+- Build.
+- Tests.
+- Error handling.
+
+### E. Files changed
+
+List all modified and newly created files.
+
+For every file, explain:
+
+- Why it was changed.
+- What was changed.
+- Which feature or defect it addresses.
+
+### F. Remaining risks
+
+List any issue that could not be safely resolved.
+
+Do not hide incomplete work.
+
+---
+
+# FINAL ACCEPTANCE MATRIX
+
+Use only these statuses:
+
+- PASS
+- FAIL
+- BLOCKED
+- NOT TESTED
+- NOT APPLICABLE
+
+| Production requirement | Status |
+|---|---|
+| Complete architecture inspection | |
+| Customer storefront responsiveness | |
+| Admin Panel responsiveness | |
+| Mobile layout verification | |
+| Tablet layout verification | |
+| Laptop layout verification | |
+| Desktop layout verification | |
+| No unintended horizontal overflow | |
+| Correct vertical scrolling | |
+| Scrollbar usability | |
+| Responsive navigation | |
+| Responsive product grids | |
+| Responsive product details | |
+| Responsive forms | |
+| Responsive tables | |
+| Responsive charts | |
+| Responsive modals and drawers | |
+| Authentication verification | |
+| Product CRUD verification | |
+| Variant verification | |
+| Attribute verification | |
+| Category and brand verification | |
+| Cart business logic verification | |
+| Wishlist verification | |
+| Checkout verification | |
+| Payment verification | |
+| Order verification | |
+| Inventory verification | |
+| Banner and navigation management | |
+| Admin analytics verification | |
+| Backend API verification | |
+| Database integrity verification | |
+| Security audit | |
+| Performance audit | |
+| Production build | |
+| Regression tests | |
+| End-to-end tests | |
+
+---
+
+# FINAL EXECUTION INSTRUCTIONS
+
+Follow this exact order:
+
+**STEP 1:** Inspect the entire existing NOVARA codebase.
+
+**STEP 2:** Understand the architecture and dependencies.
+
+**STEP 3:** Scan every important page and module for responsive problems.
+
+**STEP 4:** Identify all functional and technical issues.
+
+**STEP 5:** Perform root cause analysis for each significant defect.
+
+**STEP 6:** Prepare a minimal-change implementation plan.
+
+**STEP 7:** Fix critical issues safely.
+
+**STEP 8:** Make the entire storefront and Admin Panel responsive.
+
+**STEP 9:** Verify scrolling, overflow, navigation, forms, tables, charts, and modals.
+
+**STEP 10:** Verify frontend, backend, APIs, and database integration.
+
+**STEP 11:** Run automated and manual regression tests.
+
+**STEP 12:** Run the final production build and end-to-end verification.
+
+**STEP 13:** Produce the complete production readiness report.
+
+## NON-NEGOTIABLE RULES
+
+- Never modify code before understanding its purpose.
+- Never change unrelated business logic.
+- Never break existing API contracts unnecessarily.
+- Never redesign existing components without a real requirement.
+- Never remove existing features.
+- Never use CSS hacks to hide real problems.
+- Never disable tests to get a successful build.
+- Never claim responsiveness without checking multiple viewport sizes.
+- Never claim functionality works without testing it.
+- Never fabricate test results.
+- Never reset production data.
+- Never perform destructive production operations without explicit authorization.
+
+## FINAL GOAL
+
+Transform the existing NOVARA project into a professionally engineered, fully responsive, reliable, and client-ready e-commerce platform.
+
+Every customer-facing page and every Admin Panel page must provide a polished experience across mobile, tablet, laptop, desktop, and wide-screen devices.
+
+Every critical business workflow must work correctly.
+
+Every discovered defect must be understood at its root cause before being fixed.
+
+All changes must be minimal, safe, backward-compatible, and thoroughly verified.
+
+**Do not merely make NOVARA look production-ready. Verify that the entire existing system actually works like a professional production e-commerce application.**
